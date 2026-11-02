@@ -194,22 +194,23 @@ footer{
 <div class="wrap">
 <header>
   <div class="logo-badge">Université Lumière Lyon 2</div>
-  <h1>:plane: Simon – Assistant Master Tourisme</h1>
+  <h1>🌿 Simon – Assistant Master Tourisme</h1>
   <p>Management durable des destinations &amp; des produits touristiques</p>
 </header>
 
 <main class="panel">
   <div id="messages" aria-live="polite">
-    <div class="msg bot">Bonjour ! 👋 Je suis Simon, ton assistant virtuel pour le Master Management Durable du Tourisme.
-Pose-moi librement tes questions sur les stages et alternance (dates, gratification, convention, rapport d'étonnement...), sur le master (débouchés, compétences, les attentes, les cours...) mais aussi toutes tes questions sur l'améllioration de ton profil (cv, entretien...).</div>
+    <div class="msg bot">Bonjour ! 👋 Je suis Simon, ton assistant virtuel pour le Master Management Durable du Tourisme
+
+Pose-moi librement tes questions sur les stages, l'alternance (contrats, salaire, horaires), la rédaction de CV &amp; profil LinkedIn, la préparation aux entretiens ou enocre le déroulement du Master.</div>
   </div>
 
   <div class="quick">
-    <button type="button" onclick="askQuick('Le stage est-il obligatoire pour valider le M1 ?')">Stage obligatoire ?</button>
-    <button type="button" onclick="askQuick('Comment obtenir ma convention de stage ?')">Convention Pstage</button>
-    <button type="button" onclick="askQuick('Quel est le montant minimum de la gratification ?')">Gratification</button>
-    <button type="button" onclick="askQuick('Qu’est-ce qu’un rapport d’étonnement ?')">Rapport de stage</button>
-    <button type="button" onclick="askQuick('Quels sont les débouchés après le Master ?')">Débouchés &amp; Métiers</button>
+    <button type="button" onclick="askQuick('Stage ou alternance ?')">Stage vs Alternance</button>
+    <button type="button" onclick="askQuick('Comment améliorer mon CV ?')">Conseils CV</button>
+    <button type="button" onclick="askQuick('Comment me préparer pour un entretien ?')">Méthode Entretien</button>
+    <button type="button" onclick="askQuick('Quel est le salaire en alternance ?')">Salaire Alternance</button>
+    <button type="button" onclick="askQuick('Comment optimiser mon profil LinkedIn ?')">Profil LinkedIn</button>
   </div>
 
   <form id="chat">
@@ -222,180 +223,193 @@ Pose-moi librement tes questions sur les stages et alternance (dates, gratificat
 </div>
 
 <script>
-// --- BASE DE CONNAISSANCES INTERACTIVE & STRUCTURÉE ---
+// --- BASE DE CONNAISSANCES INTERACTIVE & ÉTOFFÉE ---
 const faqDatabase = [
-  // CATEGORIE 1 : Modalités du stage
+  // ================= CATEGORIE 1 : STAGES (Modalités & Administration) =================
   {
     id: "stage_obligatoire",
     title: "Obligation du stage en M1",
     keywords: ["obligatoire", "obliger", "valider", "m1", "ects", "credits", "validation"],
     patterns: ["le stage est il obligatoire", "est ce que le stage est obligatoire", "faut il faire un stage pour valider"],
-    answer: "📌 **Le stage est-il obligatoire pour valider le M1 ?**\n\nOui, la réalisation d’un stage est **obligatoire en M1**. Il te permet de valider les crédits ECTS associés à cette expérience professionnelle, tout en mettant en pratique les connaissances et compétences acquises durant ta formation."
+    answer: "📌 **Le stage est-il obligatoire pour valider le M1 ?**\n\nOui, la réalisation d’un stage est **obligatoire en M1**. Il te permet de valider les crédits ECTS associés à cette expérience professionnelle, tout en mettant en pratique les connaissances et compétences acquises durant ta formation[cite: 1]."
   },
   {
     id: "duree_minimale",
     title: "Durée minimale du stage",
     keywords: ["duree", "minimum", "minimale", "court", "mois"],
     patterns: ["quelle est la duree minimale du stage", "combien de temps au minimum", "duree mini stage"],
-    answer: "⏱️ **Durée minimale du stage**\n\nIl n’y a pas officiellement de durée minimale fixée. Cependant, il est **fortement conseillé de faire un stage de plus de 2 mois** afin de bénéficier d’une gratification légale obligatoire et d’acquérir davantage d’expérience professionnelle."
+    answer: "⏱️ **Durée minimale du stage**\n\nIl n’y a pas officiellement de durée minimale fixée[cite: 1]. Cependant, il est **fortement conseillé de faire un stage de plus de 2 mois** (plus de 308 heures) afin de bénéficier d’une gratification légale obligatoire et d’acquérir davantage d'autonomie[cite: 1]."
   },
   {
     id: "duree_maximale",
     title: "Durée maximale du stage",
     keywords: ["duree", "maximum", "maximale", "limite", "mois", "long"],
     patterns: ["quelle est la duree maximale", "combien de mois maximum", "duree max stage"],
-    answer: "⏱️ **Durée maximale du stage**\n\nEn France, la durée d'un stage dans un même organisme est limitée à 6 mois par année d'enseignement. Néanmoins, dans le cadre du M1, c'est **4 mois maximum** afin de ne pas amputer sur les cours qui reprennent mi-septembre."
+    answer: "⏱️ **Durée maximale du stage**\n\nEn France, la durée d'un stage dans un même organisme est limitée à 6 mois par année d'enseignement[cite: 1]. Néanmoins, dans le cadre du M1, la durée recommandée est de **4 mois maximum** afin de ne pas empiéter sur les cours qui reprennent mi-septembre[cite: 1]."
   },
   {
     id: "dates_debut",
     title: "Dates de début de stage",
     keywords: ["date", "limite", "debut", "commencer", "quand", "mai", "aout"],
     patterns: ["quand commencer le stage", "quelle est la date limite pour commencer", "debut du stage"],
-    answer: "📅 **Date limite pour commencer le stage**\n\nLe stage peut commencer **entre début mai et début août**. Il est conseillé de faire au minimum un mois, mais idéalement **au moins deux mois** afin d’acquérir davantage de connaissances et d’être autonome."
+    answer: "📅 **Date limite pour commencer le stage**\n\nLe stage peut commencer **entre début mai et début août**[cite: 1]. Il est recommandé d'effectuer au minimum 2 mois pour acquérir davantage de connaissances et pouvoir être autonome[cite: 1]."
   },
   {
     id: "stage_etranger",
     title: "Stage à l'étranger",
     keywords: ["etranger", "international", "pays", "hors france", "expatriation"],
     patterns: ["puis je faire mon stage a l etranger", "faire un stage a l etranger", "stage a l international"],
-    answer: "🌍 **Stage à l'étranger**\n\nOui, tu peux réaliser ton stage à l’étranger tant que les missions correspondent au domaine du tourisme. \n\n⚠️ Veille à bien te renseigner sur les démarches administratives spécifiques (visas, assurances). **Contacte le service des stages avant d'engager des démarches !**"
-  },
-  {
-    id: "quand_postuler",
-    title: "Période de candidature",
-    keywords: ["postuler", "chercher", "recherche", "quand", "periode", "decembre"],
-    patterns: ["quand dois je commencer a postuler", "quand chercher mon stage", "quand envoyer cv"],
-    answer: "🎯 **Quand commencer à postuler ?**\n\nTu peux commencer à postuler **dès le début du mois de décembre** ! Plus tu t’y prends tôt, plus tu as de chances de trouver la structure et les missions qui te correspondent."
-  },
-  {
-    id: "aide_cosie",
-    title: "Aide à la recherche et CV (COSIE)",
-    keywords: ["cosie", "aide", "cv", "lettre", "motivation", "entretien", "reseau", "cesure"],
-    patterns: ["qui contacter pour aide cv", "aide recherche de stage", "orientation cosie"],
-    answer: "🤝 **Besoin d'aide pour votre recherche / CV ?**\n\nLe **COSIE** (Centre d’Orientation, des Stages et de l’Insertion des Étudiantes et étudiants) t'accompagne dans :\n• La recherche de stage et tes candidatures (CV & lettre de motivation)\n• La préparation des entretiens de recrutement\n• La construction de ton réseau professionnel\n• Tes projets de césure !"
+    answer: "🌍 **Stage à l'étranger**\n\nOui, tu peux réaliser ton stage à l’étranger tant que les missions correspondent au domaine du tourisme[cite: 1]. \n\n⚠️ Pense à bien te renseigner sur les démarches administratives spécifiques (visas, assurances)[cite: 1]. **Contacte le service des stages avant de commencer les démarches !**[cite: 1]"
   },
 
-  // CATEGORIE 2 : Convention de stage
+  // ================= CATEGORIE 2 : ALTERNANCE & CONTRATS =================
+  {
+    id: "stage_vs_alternance",
+    title: "Différence Stage vs Alternance",
+    keywords: ["alternance", "apprentissage", "professionnalisation", "difference", "contrat", "statut"],
+    patterns: ["difference entre stage et alternance", "faut il faire de l alternance", "alternance ou stage"],
+    answer: "🔄 **Stage vs Alternance : quelles différences ?**\n\n• **Stage :** Statut d'étudiant. Rémunéré par une *gratification* (si > 2 mois). Convention tripartie[cite: 1].\n• **Alternance (Apprentissage ou Pro) :** Statut de salarié de l'entreprise. Vrai *salaire* mensuel (pourcentage du SMIC), congés payés légaux (5 semaines), cotisations retraite & chômage.\n\n⚠️ *Vérifie auprès du responsable de formation (M. Simon) la possibilité et le rythme d'alternance selon l'année (M1/M2) !*"
+  },
+  {
+    id: "salaire_alternance",
+    title: "Rémunération & Salaire en Alternance",
+    keywords: ["salaire", "alternance", "remuneration", "paye", "smic", "pourcentage", "brut", "net"],
+    patterns: ["quel est le salaire en alternance", "combien gagne un alternant", "remuneration apprentissage"],
+    answer: "💰 **Rémunération en Alternance**\n\nEn contrat d'apprentissage, la rémunération dépend de ton âge et de ton année d'études :\n• **18 à 20 ans :** ~43% à 51% du SMIC en 1re année, ~61% en 2e année.\n• **21 à 25 ans :** ~53% à 61% du SMIC en 1re année, ~65% en 2e année.\n• **26 ans et plus :** 100% du SMIC (ou du salaire minimum conventionnel).\n\n*Bonus : L'alternant ne paye pas de cotisations sociales sur son salaire net dans la plupart des cas.*"
+  },
+  {
+    id: "temps_travail_alternance",
+    title: "Temps de travail et congés en alternance",
+    keywords: ["temps", "travail", "heures", "35h", "conges", "vacances", "rtt"],
+    patterns: ["combien d heures travaille un alternant", "a t on des vacances en alternance"],
+    answer: "⏰ **Temps de travail & Congés en Alternance**\n\n• **Temps de travail :** Tu es soumis au régime légal de 35h par semaine (ou accord d'entreprise avec RTT).\n• **Congés payés :** Tu as droit à 2,5 jours ouvrables de congés par mois travaillé (5 semaines par an), tout comme les autres salariés de l'entreprise.\n• Tu n'as plus les vacances universitaires classiques : les semaines d'examen/cours sont du temps de travail effectif."
+  },
+
+  // ================= CATEGORIE 3 : CONVENTIONS & DÉMARCHES =================
   {
     id: "obtenir_convention",
     title: "Obtenir sa convention de stage",
     keywords: ["convention", "pstage", "obtenir", "demande", "simon", "professeur"],
     patterns: ["comment obtenir ma convention", "faire sa convention", "procedure convention"],
-    answer: "📄 **Comment obtenir ma convention de stage ?**\n\n1. Une fois l’organisme trouvé et le stage validé par ton professeur référent (**M. Anthony Simon**), effectue ta demande de convention sur la plateforme **Pstage**.\n2. La convention doit impérativement être complétée et signée par toutes les parties **avant** le début du stage."
-  },
-  {
-    id: "lieu_convention",
-    title: "Formulaire de convention",
-    keywords: ["formulaire", "lien", "ou trouver", "telecharger", "pstage"],
-    patterns: ["ou trouver le formulaire de convention", "ou est le lien convention"],
-    answer: "📋 **Où trouver le formulaire de convention ?**\n\nLe formulaire et la saisie de convention sont accessibles directement en ligne via l'espace étudiant sur la plateforme **Pstage** de l'Université Lumière Lyon 2."
-  },
-  {
-    id: "remplir_convention",
-    title: "Qui remplit la convention ?",
-    keywords: ["qui", "remplit", "completer", "tuteur", "signature", "partie"],
-    patterns: ["qui doit completer la convention", "qui signe la convention"],
-    answer: "✍️ **Qui doit compléter et signer la convention ?**\n\nLa convention est renseignée à partir des informations fournies par toi et l'organisme d'accueil. Tu dois vérifier l'exactitude des dates, horaires et missions.\nElle doit être signée par : **l'étudiant, l'organisme d'accueil et l'université** (et le tuteur pédagogique)."
+    answer: "📄 **Comment obtenir ma convention de stage ?**\n\n1. Une fois l’organisme trouvé et le stage validé par ton professeur référent (**M. Anthony Simon**), effectue ta demande de convention en ligne via la plateforme **Pstage**[cite: 1].\n2. La convention doit impérativement être complétée et signée par toutes les parties **avant** le début effectif du stage[cite: 1]."
   },
   {
     id: "delai_convention",
     title: "Délai de traitement de la convention",
     keywords: ["delai", "temps", "traitement", "valider", "jours", "anticipation"],
     patterns: ["quel est le delai de traitement", "combien de temps prend la convention"],
-    answer: "⏳ **Délai de traitement d'une convention**\n\nLe délai dépend du service administratif et du volume de demandes. Compte **plusieurs jours ouvrés** et anticipe au maximum ta demande avant ta date de début de stage !"
+    answer: "⏳ **Délai de traitement d'une convention**\n\nLe délai dépend du service administratif et du nombre de demandes[cite: 1]. Compte **plusieurs jours ouvrés** et anticipe au maximum ta demande avant ta date de début de stage ![cite: 1]"
   },
 
-  // CATEGORIE 3 : Gratification et droits du stage
+  // ================= CATEGORIE 4 : GRATIFICATION & DROITS STAGE =================
   {
     id: "stage_remunere",
     title: "Gratification obligatoire ?",
     keywords: ["gratification", "remunere", "paye", "salaire", "308", "heures", "2 mois", "cdd"],
     patterns: ["le stage est il obligatoirement remunere", "est ce qu on est paye en stage"],
-    answer: "💶 **Le stage est-il obligatoirement rémunéré ?**\n\nEn France, la gratification est **obligatoire** lorsque le stage dépasse **2 mois consécutifs** (soit plus de 308 heures de présence effective). En dessous de ce seuil, elle reste facultative.\n\n💡 *Astuce :* Il est courant de négocier soit un stage de 4 mois gratifié, soit 2 mois de stage non rémunéré suivis de 2 mois en contrat saisonnier (CDD).\n*Attention : à l'étranger, les règles dépendent du pays d'accueil !*"
+    answer: "💶 **Le stage est-il obligatoirement rémunéré ?**\n\nEn France, la gratification est **obligatoire** dès que la durée du stage dépasse 2 mois consécutifs (plus de 308 heures de présence)[cite: 1]. En dessous de ce seuil, elle reste facultative[cite: 1].\n\n💡 *Astuce :* Négocie lors de l'entretien 4 mois gratifiés, ou bien 2 mois de stage non rémunérés suivis de 2 mois en job saisonnier (CDD)[cite: 1].\n*Attention : à l'étranger, les règles dépendent du pays d'accueil !*[cite: 1]"
   },
   {
     id: "montant_gratification",
     title: "Montant de la gratification",
     keywords: ["montant", "combien", "taux", "horaire", "4.50", "tarif", "remuneration"],
     patterns: ["quel est le montant minimum de la gratification", "combien touche un stagiaire"],
-    answer: "💰 **Quel est le montant minimum de la gratification ?**\n\nEn France, le montant légal est calculé sur un taux horaire fixé par réglementation. Pour **2026**, la gratification minimale s'élève à **4,50 € / heure** de présence effective. N'hésite pas à consulter *Service-Public.fr* pour suivre le barème exact."
+    answer: "💰 **Quel est le montant minimum de la gratification ?**\n\nLe montant minimum légal est calculé sur un taux horaire[cite: 1]. Pour **2026**, la gratification minimale des stagiaires en France s'élève à **4,50 € / heure** de présence effective[cite: 1]. Consulte *Service-Public.fr* pour connaître le taux exact en vigueur[cite: 1]."
   },
   {
     id: "conges_horaires",
-    title: "Congés et horaires de travail",
+    title: "Congés et horaires de stage",
     keywords: ["conges", "vacances", "absence", "horaires", "week-end", "ferie", "repos"],
     patterns: ["ai je droit a des conges", "quels sont mes horaires", "travailler le week end"],
-    answer: "🏖️ **Congés et horaires de travail**\n\n• **Congés :** Pour les stages de plus de 2 mois, la convention doit prévoir la possibilité de congés (à définir avec l'entreprise).\n• **Horaires :** Tes horaires sont fixés dans la convention et doivent respecter le droit du travail (temps de repos légaux). Des aménagements peuvent être demandés si besoin."
-  },
-  {
-    id: "probleme_entreprise",
-    title: "Problème pendant le stage",
-    keywords: ["probleme", "conflit", "souci", "entreprise", "tuteur", "urgence", "contact"],
-    patterns: ["qui contacter en cas de probleme", "souci avec mon entreprise"],
-    answer: "⚠️ **Qui contacter en cas de problème en entreprise ?**\n\nContacte au plus vite ton **tuteur pédagogique**, ton responsable de formation (**M. Anthony Simon**) ou le service des stages de l'Université. N'attends pas que la situation se dégrade !"
+    answer: "🏖️ **Congés et horaires de travail en stage**\n\n• **Congés :** Pour les stages de plus de 2 mois, la convention doit prévoir la possibilité de congés et d'absences (à négocier avec l'entreprise)[cite: 1].\n• **Horaires :** Définis dans la convention[cite: 1]. Tu dois respecter la réglementation de l'entreprise et les repos légaux[cite: 1]. Tu as le droit de demander un aménagement si nécessaire[cite: 1]."
   },
 
-  // CATEGORIE 4 : Rapport de stage
+  // ================= CATEGORIE 5 : CONSEILS CV & PROFIL PROFESSIONNEL =================
   {
-    id: "rapport_etonnement",
-    title: "Rapport d'étonnement",
-    keywords: ["rapport", "etonnement", "pages", "moodle", "critique", "preconisation", "trame"],
-    patterns: ["qu est ce qu un rapport d etonnement", "comment faire le rapport de stage"],
-    answer: "📝 **Qu’est-ce qu’un rapport d’étonnement ?**\n\nC'est un document d'une **dizaine de pages** structuré ainsi :\n1. Présentation de la structure\n2. Missions réalisées\n3. Étonnements & constats critiques\n4. Préconisations\n\n💡 La trame exacte est sur **Moodle**. Fais preuve d'esprit critique dans les parties 3 et 4 pour valoriser ton travail !"
+    id: "ameliorer_cv",
+    title: "Améliorer son CV pour le Tourisme",
+    keywords: ["cv", "curriculum", "rubrique", "competences", "mise en page", "design", "rediger"],
+    patterns: ["comment ameliorer mon cv", "comment faire un bon cv", "conseils cv tourisme"],
+    answer: "📄 **Comment créer un CV percutant dans le tourisme ?**\n\n1. **Titre clair :** Indique le poste visé (ex: *« Stagiaire Chargé·e de Développement Touristique Durable »*).\n2. **Structure aérée :** 1 page maximum ! Utilise des rubriques nettes : Expériences, Formation, Compétences (outils web, data, langues), Langues parlées.\n3. **Missions concrètes :** Utilise des verbes d'action (*« Conçu une offre écotouristique », « Analysé la fréquentation »*).\n4. **Compétences durables :** Valorise tes connaissances en RSO, gestion de projet, éco-conception ou marketing territorial[cite: 2, 4, 5].\n5. **Design :** Utilise des teintes sobres et professionnelles (ex: vert/beige nature)."
   },
   {
-    id: "date_rapport",
-    title: "Date de rendu du rapport",
-    keywords: ["date", "limite", "depot", "rendu", "quand", "juillet"],
-    patterns: ["quelle est la date limite de depot du rapport", "quand rendre le rapport"],
-    answer: "📅 **Date limite de dépôt du rapport**\n\nLe rapport doit généralement être déposé **début juillet**. M. Anthony Simon vous confirmera la date précise au cours du semestre."
+    id: "optimiser_linkedin",
+    title: "Optimiser son profil LinkedIn",
+    keywords: ["linkedin", "profil", "reseau", "social", "e-reputation", "titre", "photo"],
+    patterns: ["comment optimiser mon profil linkedin", "que mettre sur linkedin", "conseils linkedin"],
+    answer: "🌐 **Optimiser son profil LinkedIn étudiant**\n\n• **Titre accrocheur :** Ne mets pas juste *« Étudiant à Lyon 2 »*, mais plutôt *« Étudiant Master Tourisme Durable | À la recherche d'un stage de 4 mois dès Mai »*.\n• **Photo professionnelle :** Souriante, fond neutre, tenue soignée.\n• **Section « À propos » :** Raconte brièvement ton projet : ce qui te passionne dans le tourisme responsable et ce que tu apportes.\n• **Compétences & Réseau :** Ajoute tes camarades, professeurs, et suivez les Offices de Tourisme, CDT et agences du secteur."
+  },
+  {
+    id: "lettre_motivation",
+    title: "Rédiger sa lettre de motivation",
+    keywords: ["lettre", "motivation", "candidature", "mail", "rediger"],
+    patterns: ["comment faire une lettre de motivation", "rediger lettre motivation"],
+    answer: "✉️ **Structure gagnante de la lettre de motivation (Vous / Moi / Nous)**\n\n1. **VOUS (La structure) :** Pourquoi cette entreprise ou destination t'intéresse (actualité, engagement durable).\n2. **MOI (Ton profil) :** Relie tes cours au Master Tourisme et tes expériences aux besoins du poste.\n3. **NOUS (La collaboration) :** Ce que vous allez accomplir ensemble durant le stage.\n\n*Conseil : Évite les pavés. 3 à 4 paragraphes max, ciblés et sans fautes d'orthographe !*"
+  },
+
+  // ================= CATEGORIE 6 : PRÉPARATION AUX ENTRETIENS =================
+  {
+    id: "preparer_entretien",
+    title: "Préparer un entretien professionnel",
+    keywords: ["entretien", "recrutement", "recruteur", "oral", "repondre", "star", "methode"],
+    patterns: ["comment preparer un entretien", "conseils pour entretien de recrutement", "methode entretien"],
+    answer: "🎯 **Méthode d'excellence pour préparer ton entretien**\n\n1. **Renseigne-toi sur la structure :** Produits/destinations, valeurs, engagements durables, actualités récentes.\n2. **Prépare ton « Pitch » (2 min) :** Qui tu es, ton parcours en Master Tourisme Lyon 2, et pourquoi ce poste[cite: 1, 2].\n3. **Utilise la méthode S.T.A.R. pour illustrer tes compétences :**\n   • **S**ituation : Le contexte d'un projet passé.\n   • **T**âche : L'objectif ou le problème.\n   • **A**ction : Ce que TU as mis en œuvre.\n   • **R**ésultat : Ce que ça a apporté (chiffres, succès, apprentissage).\n4. **Prépare 2 ou 3 questions :** Pose des questions sur l'équipe, les défis à venir ou la démarche RSE de l'entreprise."
+  },
+  {
+    id: "posture_suivi_entretien",
+    title: "Posture & Suivi d'entretien",
+    keywords: ["posture", "suivi", "remerciement", "relance", "mail de remerciement", "stress"],
+    patterns: ["que faire apres un entretien", "envoyer un mail de remerciement"],
+    answer: "🤝 **Posture pendant & après l'entretien**\n\n• **Pendant :** Adopte une posture d'écoute active, prends des notes, reste naturel(le) et montre ton enthousiasme pour le tourisme durable[cite: 1, 2].\n• **Après (Dans les 24h) :** Envoie un **mail de remerciement** court : reconfirme ton intérêt pour le poste, rappelle 1 ou 2 points clés abordés et remercie l'interlocuteur pour son temps.\n• **Relance :** Si tu n'as pas de retour après la date convenue, relance poliment par mail ou téléphone au bout de 7 à 10 jours."
+  },
+
+  // ================= CATEGORIE 7 : RAPPORT DE STAGE =================
+  {
+    id: "rapport_etonnement",
+    title: "Le rapport d'étonnement",
+    keywords: ["rapport", "etonnement", "pages", "moodle", "critique", "preconisation", "trame"],
+    patterns: ["qu est ce qu un rapport d etonnement", "comment faire le rapport de stage"],
+    answer: "📝 **Le rapport d’étonnement (M1)**\n\nDocument d'environ **10 pages** articulé ainsi :\n1. Présentation de la structure\n2. Missions confiées\n3. Étonnements & constats critiques (très important !)\n4. Préconisations opérationnelles[cite: 1]\n\n💡 La trame complète est accessible sur **Moodle**[cite: 1]. Sois constructif et analytique dans tes remarques[cite: 1]."
   },
   {
     id: "depot_rapport",
-    title: "Où déposer le rapport",
-    keywords: ["ou", "deposer", "envoyer", "mail", "pdf", "tuteur"],
-    patterns: ["ou deposer mon rapport de stage", "comment envoyer le rapport"],
-    answer: "📤 **Où déposer mon rapport de stage ?**\n\nTu dois l’envoyer **par e-mail au format PDF** à ton tuteur pédagogique (qui te sera attribué par M. Simon) avant la date butoir."
-  },
-  {
-    id: "soutenance",
-    title: "Soutenance orale",
-    keywords: ["soutenance", "oral", "presentation", "passer"],
-    patterns: ["une soutenance est elle obligatoire", "y a t il une soutenance orale"],
-    answer: "🗣️ **Une soutenance est-elle obligatoire ?**\n\nNon ! Il n’y a **pas de soutenance orale** exigée pour ce rapport de stage en M1."
+    title: "Dépôt et soutenance du rapport",
+    keywords: ["depot", "date", "rendu", "soutenance", "oral", "juillet", "mail", "pdf"],
+    patterns: ["quand rendre le rapport", "ou deposer le rapport", "y a t il une soutenance"],
+    answer: "📅 **Dépôt & Soutenance du rapport**\n\n• **Date :** Rendu prévu **début juillet** par e-mail en PDF à ton tuteur pédagogique[cite: 1].\n• **Soutenance :** Aucune soutenance orale n'est demandée pour ce rapport de M1[cite: 1]."
   },
 
-  // MASTER & INFOS GENERALES (du PDF officiel)
+  // ================= CATEGORIE 8 : INFORMATIONS MASTER =================
   {
     id: "infos_master",
     title: "Présentation du Master Tourisme",
     keywords: ["master", "presentation", "lyon 2", "porte des alpes", "ufr", "temps et territoires", "durabilite"],
     patterns: ["presenter le master", "c est quoi ce master", "ou ont lieu les cours"],
-    answer: "🎓 **Master Management Durable du Tourisme**\n\nDispensé à l'**UFR Temps et Territoires** (Campus Porte des Alpes, Lyon 2), ce master prépare aux enjeux du marketing territorial, de la valorisation des patrimoines et de la transition écologique/numérique du tourisme."
+    answer: "🎓 **Master Management Durable du Tourisme**\n\nRattaché à l'**UFR Temps et Territoires** (Campus Porte des Alpes, Lyon 2), le Master forme des cadres experts en marketing territorial, valorisation des patrimoines et transition écologique du tourisme[cite: 2]."
   },
   {
     id: "responsable_master",
     title: "Responsable du Master",
     keywords: ["responsable", "anthony", "simon", "directeur", "contact", "email"],
     patterns: ["qui est le responsable du master", "comment contacter M Simon"],
-    answer: "👤 **Responsable de la formation**\n\nLe responsable de la formation est **M. Anthony Simon**.\n📧 Email : anthony.simon@univ-lyon2.fr"
+    answer: "👤 **Responsable de la formation**\n\nLe responsable du Master est **M. Anthony Simon**[cite: 2].\n📧 Email : anthony.simon@univ-lyon2.fr[cite: 2]"
   },
   {
     id: "debouches_metiers",
     title: "Débouchés professionnels",
     keywords: ["metier", "metiers", "debouche", "debouches", "travail", "emploi", "apres"],
     patterns: ["quels sont les debouches", "quels metiers apres le master"],
-    answer: "💼 **Débouchés professionnels**\n\n• Chargé·e de mission tourisme / développement territorial (collectivités, OT)\n• Concepteur·rice de produits touristiques (agences, TO)\n• Chargé·e de promotion, communication &amp; webmarketing\n• Chargé·e d'études et d'ingénierie touristique / consultant junior\n• Responsable tourisme responsable ou de labels touristiques\n*(Évolution vers direction d'OT ou d'établissement après 3 à 5 ans)*"
+    answer: "💼 **Débouchés professionnels après le Master**\n\n• Chargé·e de mission tourisme / développement territorial (collectivités, OT)[cite: 5]\n• Concepteur·rice de produits touristiques (agences, tour-opérateurs)[cite: 5]\n• Chargé·e de promotion, communication & webmarketing touristique[cite: 5]\n• Chargé·e d'études et d'ingénierie / consultant junior[cite: 5]\n• Responsable tourisme responsable ou démarches de labellisation RSE[cite: 6]\n*(Évolution possible vers direction d'OT ou d'établissement touristique)*[cite: 6]"
   }
 ];
 
-// --- MOTEUR DE RECHERCHE NLP (Natural Language Processing) SIMPLIFIÉ ---
-const STOP_WORDS = new Set(["le","la","les","l","un","une","des","du","de","d","ce","c","a","au","aux","en","pour","par","sur","dans","avec","et","ou","est","son","sa","ses","mon","ma","mes","ta","ton","tes","tu","il","elle","nous","vous","ils","elles","qui","que","quoi","quand","ou","comment","pourquoi"]);
+// --- MOTEUR NLP OPTIMISÉ ---
+const STOP_WORDS = new Set(["le","la","les","l","un","une","des","du","de","d","ce","c","a","au","aux","en","pour","par","sur","dans","avec","et","ou","est","son","sa","ses","mon","ma","mes","ta","ton","tes","tu","il","elle","nous","vous","ils","elles","qui","que","quoi","quand","ou","comment","pourquoi","faut","faire","avoir"]);
 
 function tokenize(text) {
   return text
     .toLowerCase()
-    .normalize("NFD").replace(/[\u0300-\u036f]/g, "") // Supprime les accents
+    .normalize("NFD").replace(/[\u0300-\u036f]/g, "")
     .replace(/[^a-z0-9\s]/g, " ")
     .split(/\s+/)
     .filter(w => w.length > 1 && !STOP_WORDS.has(w));
@@ -405,7 +419,7 @@ function calculateScore(userTokens, item) {
   let score = 0;
   const userTextNormalized = userTokens.join(" ");
 
-  // 1. Check patterns exacts ou très proches
+  // 1. Patterns exacts
   for (let pattern of item.patterns) {
     const patNorm = pattern.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
     if (userTextNormalized.includes(patNorm)) {
@@ -413,7 +427,7 @@ function calculateScore(userTokens, item) {
     }
   }
 
-  // 2. Matching sur les mots-clés principaux
+  // 2. Mots-clés
   for (let token of userTokens) {
     for (let kw of item.keywords) {
       const kwNorm = kw.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
@@ -441,7 +455,7 @@ function getBestMatches(userQuery) {
   return scored.filter(s => s.score > 0);
 }
 
-// --- GESTION DE L'INTERFACE ET DES MESSAGES ---
+// --- INTERFACE CHAT ---
 const messages = document.getElementById("messages");
 const form = document.getElementById("chat");
 const input = document.getElementById("question");
@@ -452,7 +466,7 @@ function addMessage(content, sender, isHTML = false) {
   if (isHTML) {
     msgDiv.innerHTML = content;
   } else {
-    msgDiv.innerHTML = content.replace(/\n/g, "<br>").replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>");
+    msgDiv.innerHTML = content.replace(/\n/g, "<br>").replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>").replace(/\*(.*?)\*/g, "<em>$1</em>");
   }
   messages.appendChild(msgDiv);
   messages.scrollTop = messages.scrollHeight;
@@ -484,12 +498,10 @@ function handleSearch(query) {
     const results = getBestMatches(query);
 
     if (results.length > 0 && results[0].score >= 4) {
-      // Meilleure réponse trouvée avec une bonne confiance
       addMessage(results[0].item.answer, "bot");
     } 
-    else if (results.length > 0) {
-      // Hésitation entre plusieurs réponses -> propose des options
-      let html = "🤔 Je ne suis pas sûr à 100% de comprendre ta demande. Voulait-tu parler de l'un de ces sujets ?<div class='suggestions-box'>";
+    else if (results.length > 0 && results[0].score >= 2) {
+      let html = "🤔 Je n'ai pas trouvé la réponse exacte, mais voici des sujets proches qui pourraient t'aider :<div class='suggestions-box'>";
       results.slice(0, 3).forEach(r => {
         html += `<button class='suggestion-btn' onclick="askQuick('${r.item.patterns[0] || r.item.title}')">${r.item.title}</button>`;
       });
@@ -497,8 +509,8 @@ function handleSearch(query) {
       addMessage(html, "bot", true);
     } 
     else {
-      // Aucune réponse trouvée
-      const fallback = "🤔 Je n'ai pas trouvé de réponse précise pour cette question.\n\nN'hésite pas à reformuler avec d'autres mots (ex: *gratification, convention, M. Simon, rapport d'étonnement, débouchés*) ou à écrire directement à **M. Anthony Simon** (anthony.simon@univ-lyon2.fr).";
+      // MESSAGE PERSONNALISÉ DEMANDÉ
+      const fallback = "Oops, je suis actuellement au Puy du Fou et pourra que vous repondre lors de mon retour";
       addMessage(fallback, "bot");
     }
   }, 400);
