@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Simon – Assistant du Master Tourisme</title>
+<style>
+:root{--ink:#20312d;--muted:#687873;--green:#246b57;--pale:#edf5f1;--line:#dce7e1;--white:#fff}
+*{box-sizing:border-box}body{margin:0;background:#f4f7f5;color:var(--ink);font:16px/1.5 system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
+.wrap{max-width:820px;margin:0 auto;min-height:100vh;padding:24px 16px;display:flex;flex-direction:column}
+header{padding:14px 4px 20px}h1{font-size:1.55rem;margin:0 0 4px}header p{margin:0;color:var(--muted)}
+.panel{background:var(--white);border:1px solid var(--line);border-radius:18px;box-shadow:0 8px 28px #1c38240b;display:flex;flex-direction:column;flex:1;min-height:570px;overflow:hidden}
+#messages{padding:20px;display:flex;flex-direction:column;gap:14px;flex:1;overflow:auto}
+.msg{max-width:88%;padding:12px 15px;border-radius:16px;white-space:pre-wrap}
+.bot{align-self:flex-start;background:var(--pale);border-bottom-left-radius:5px}
+.user{align-self:flex-end;background:var(--green);color:white;border-bottom-right-radius:5px}
+form{border-top:1px solid var(--line);padding:14px;display:flex;gap:10px;background:#fff}
+input{min-width:0;flex:1;border:1px solid var(--line);border-radius:12px;padding:13px;font:inherit}
+input:focus{outline:2px solid #9bc7b6;border-color:var(--green)}
+button{border:0;background:var(--green);color:white;border-radius:12px;padding:0 18px;font:600 1rem system-ui;cursor:pointer}
+button:hover{filter:brightness(.94)}
+.quick{display:flex;flex-wrap:wrap;gap:8px;padding:0 20px 16px}
+.quick button{background:#fff;color:var(--green);border:1px solid var(--line);padding:8px 11px;font-size:.88rem}
+footer{text-align:center;color:var(--muted);font-size:.78rem;padding:14px}
+@media(max-width:520px){.wrap{padding:12px 10px}.panel{min-height:75vh}.msg{max-width:95%}h1{font-size:1.3rem}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <h1>🌿 Simon – Ton assistant du Master</h1>
+  <p>Management durable des destinations et produits touristiques · Université Lumière Lyon 2</p>
+</header>
+<main class="panel">
+  <div id="messages" aria-live="polite">
+    <div class="msg bot">Bonjour ! 👋 Je suis Simon, ton assistant pour le Master Management Durable du Tourisme à Lyon 2[cite: 2].\n\nJe peux t'aider sur les stages (modalités, conventions, gratification, rapport d'étonnement), les débouchés, ainsi que sur tes CV, lettres de motivation et entretiens. Pose-moi une question !</div>
+  </div>
+  <div class="quick">
+    <button type="button" data-q="Le stage est-il obligatoire en M1 ?">Stage obligatoire ?</button>
+    <button type="button" data-q="Comment obtenir ma convention de stage ?">Convention de stage</button>
+    <button type="button" data-q="Le stage est-il obligatoirement rémunéré ?">Gratification & Rémunération</button>
+    <button type="button" data-q="Qu'est-ce qu'un rapport d'étonnement ?">Rapport de stage</button>
+    <button type="button" data-q="Quels métiers puis-je exercer après le Master ?">Débouchés & Métiers</button>
+  </div>
+  <form id="chat">
+    <input id="question" autocomplete="off" placeholder="Écris ta question ici…" aria-label="Ta question">
+    <button type="submit">Envoyer</button>
+  </form>
+</main>
+<footer>Simon est un outil d'orientation étudiant. Contact responsable : Anthony Simon (anthony.simon@univ-lyon2.fr)[cite: 2].</footer>
+</div>
+<script>
+const knowledge = [
+// CATEGORIE 1 - Modalités du stage
+{keys:["stage obligatoire","valider mon m1","stage m1"],answer:"La réalisation d'un stage est obligatoire en M1. Il te permet de valider les crédits ECTS associés à cette expérience professionnelle, tout en mettant en pratique les connaissances et compétences acquises durant ta formation."},
+{keys:["durée minimale","minimum stage","combien de temps stage"],answer:"Il n'y a pas officiellement de durée minimale. Cependant, il est conseillé de faire un stage de plus de deux mois afin de bénéficier d'une gratification et d'acquérir davantage d'expérience professionnelle."},
+{keys:["durée maximale","maximum stage","combien de temps maximum"],answer:"En France, la durée d'un stage dans un même organisme d'accueil est limitée à 6 mois par année d'enseignement. Dans le cadre du M1, maximum 4 mois pour ne pas amputer sur les cours qui reprennent mi-septembre."},
+{keys:["date limite","commencer mon stage","quand debuter stage"],answer:"Il est conseillé de faire au minimum un mois de stage et il peut commencer entre début mai et début août. Il est néanmoins recommandé de faire minimum deux mois afin d'acquérir davantage de connaissances et d'être autonome."},
+{keys:["stage à l'étranger","etranger","international"],answer:"Tu peux réaliser un stage à l'étranger tant que les missions correspondent au domaine du tourisme. Renseigne-toi bien sur les démarches administratives supplémentaires qui peuvent différer selon le pays. Contacte le service des stages avant de commencer les démarches !"},
+{keys:["commencer à postuler","quand postuler","chercher un stage"],answer:"Tu peux commencer à postuler dès début décembre ! Plus tu t'y prends tôt, plus tu as de chances de trouver la structure qui te correspond."},
+{keys:["cosie","aide recherche stage","lettre de motivation","cv stage","insertion"],answer:"Le COSIE (Centre d'Orientation, des Stages et de l'Insertion des Étudiantes et étudiants) peut t'accompagner dans ton insertion professionnelle : recherche de stage, candidature, entretien de recrutement, construction de ton réseau ou projet de césure."},
+
+// CATEGORIE 2 - Convention de stage
+{keys:["convention de stage","obtenir convention","pstage","m. simon"],answer:"Une fois l'organisme d'accueil trouvé et le stage validé par l'établissement (par le professeur référent - M. Simon), tu dois effectuer une demande de convention via la plateforme Pstage. Elle doit être complétée et signée avant le début du stage."},
+{keys:["formulaire de convention","ou trouver convention"],answer:"Le formulaire de convention est disponible sur la plateforme administrative de l'université ou les liens dédiés aux stages (Pstage)."},
+{keys:["qui doit compléter","remplir convention"],answer:"La convention est généralement complétée à partir des informations fournies par l'étudiant et l'organisme d'accueil. Vérifie l'exactitude des missions, dates, horaires et tuteurs. Elle doit être signée par l'étudiant, l'organisme et l'établissement."},
+{keys:["délai de traitement","delai convention"],answer:"Le délai de traitement dépend du service administratif et du nombre de demandes en cours. Prévoir plusieurs jours ouvrés et anticipe ta demande !"},
+
+// CATEGORIE 3 - Gratification et droits du stage
+{keys:["rémunéré","gratification","payé","argent stage","308 heures"],answer:"En France, la gratification est obligatoire si le stage dépasse 2 mois consécutifs (plus de 308 heures dans le même organisme). En dessous, elle est facultative.\n\nAstuce : Négocie lors de l'entretien la possibilité de faire 4 mois (rémunérés) ou 2 mois non rémunérés suivis de 2 mois en job saisonnier (CDD).\nAttention : règles différentes pour l'étranger !"},
+{keys:["montant minimum","taux horaire","4,50","service-public"],answer:"Le montant minimum légal est calculé sur un taux horaire fixé par la réglementation. En 2026, la gratification minimale des stagiaires en France s'élève à environ 4,50 €/heure de présence effective. Consulte Service-Public.fr pour vérifier les évolutions."},
+{keys:["congés stage","absences stage","droits stage"],answer:"Pour les stages de plus de 2 mois, la convention doit prévoir la possibilité de congés et d'autorisations d'absence. Les modalités se définissent avec l'organisme d'accueil."},
+{keys:["week-end","jours fériés","horaires travail","horaires stage"],answer:"Tes horaires sont définis dans la convention de stage. Tu dois respecter les règles applicables dans l'organisme d'accueil (durée du travail et temps de repos). Il est possible de demander un aménagement si nécessaire."},
+{keys:["problème entreprise","tuteur pédagogique","conflit stage"],answer:"Tu peux contacter ton tuteur pédagogique, ton responsable de formation (M. Simon) ou le service des stages de l'établissement. En cas de difficulté importante, signale-le rapidement."},
+
+// CATEGORIE 4 - Le rapport de stage / rapport d'étonnement
+{keys:["rapport d'étonnement","rapport de stage","trame moodle","partie iii","partie iv"],answer:"Le rapport d'étonnement fait une dizaine de pages et comprend : présentation de la structure, missions, étonnement et préconisation. La trame est sur Moodle. Pour te démarquer, fais preuve d'esprit critique, particulièrement dans les parties III (étonnement) et IV (préconisations)."},
+{keys:["date limite rapport","rendre rapport","debut juillet"],answer:"Le rapport doit être rendu début juillet. M. Simon te confirmera la date exacte."},
+{keys:["déposer mon rapport","où envoyer rapport","pdf mail"],answer:"Tu dois l'envoyer par mail en format PDF avant la date butoir à ton tuteur pédagogique qui te sera attribué par M. Simon."},
+{keys:["soutenance","soutenance orale"],answer:"Il n'est pas attendu de soutenance orale pour ce rapport de stage de M1."},
+
+// MASTER & DEBOUCHES (Issus du document officiel Lyon 2)
+{keys:["métier","métiers","débouché","débouchés","travailler dans le tourisme"],answer:"Le Master Tourisme de Lyon 2 forme aux métiers suivants :\n• Chargé de mission et de développement local / touristique[cite: 5]\n• Chargé de promotion, de communication et du numérique / community manager[cite: 5]\n• Concepteur de produits touristiques & agences / tour-opérateurs[cite: 5]\n• Chargé d'études marketing ou socio-économiques[cite: 5]\n• Directeur d'office de tourisme ou d'établissement (après 3 à 5 ans d'expérience)[cite: 6]\n• Chargé du tourisme responsable et de labels touristiques[cite: 5, 6]"},
+{keys:["compétence","compétences","formation","master tourisme","lyon 2"],answer:"Le Master Management durable des destinations et produits touristiques de l'UFR Temps et Territoires (Lyon 2) axe sa formation sur :\n• Le marketing territorial et la valorisation des patrimoines[cite: 2]\n• Le management durable des destinations[cite: 2]\n• Les transitions écologiques, numériques et sociales[cite: 2]\nResponsable de la formation : Anthony Simon (anthony.simon@univ-lyon2.fr)[cite: 2]."},
+{keys:["cv","curriculum","lettre","entretien"],answer:"Pour valoriser ton profil pour un stage ou un emploi :\n• Mets en avant la gestion de projet, la communication et l'analyse territoriale.\n• Adapte ton CV et ta lettre aux attentes spécifiques de la structure.\n• Renseigne-toi bien sur les enjeux de durabilité et de transition du tourisme."}
+];
+
+function normalize(s){return s.toLocaleLowerCase("fr").normalize("NFD").replace(/[\u0300-\u036f]/g,"").replace(/[^a-z0-9\s]/g," ");}
+function answer(q){
+ const text=normalize(q); const words=text.split(/\s+/).filter(w=>w.length>2);
+ let best=null,score=0;
+ for(const item of knowledge){let n=0;for(const key of item.keys){const k=normalize(key);if(text.includes(k))n+=k.includes(" ")?3:2;else if(words.some(w=>w===k||w.startsWith(k)&&k.length>4))n+=1;}if(n>score){score=n;best=item;}}
+ if(best&&score>0)return best.answer;
+ return "Je n'ai pas trouvé de réponse précise à ta question dans ma base. 🤔\n\nN'hésite pas à reformuler avec d'autres mots-clés ou à contacter directement le responsable de la formation, M. Simon (anthony.simon@univ-lyon2.fr).\n\nSimon préfère reconnaître ses limites plutôt que d'inventer une règle administrative !";
+}
+const messages=document.getElementById("messages"),form=document.getElementById("chat"),input=document.getElementById("question");
+function add(text,who){const el=document.createElement("div");el.className="msg "+who;el.textContent=text;messages.appendChild(el);messages.scrollTop=messages.scrollHeight;}
+function send(q){if(!q.trim())return;add(q,"user");add(answer(q),"bot");}
+form.addEventListener("submit",e=>{e.preventDefault();const q=input.value;input.value="";send(q);});
+document.querySelectorAll("[data-q]").forEach(b=>b.addEventListener("click",()=>send(b.dataset.q)));
+</script>
+</body>
+</html>
