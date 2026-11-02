@@ -200,17 +200,17 @@ footer{
 
 <main class="panel">
   <div id="messages" aria-live="polite">
-    <div class="msg bot">Bonjour ! 👋 Je suis Simon, ton assistant virtuel pour le Master Management Durable du Tourisme
+    <div class="msg bot">Bonjour ! 👋 Je suis **Simon**, ton assistant virtuel pour le Master Management Durable du Tourisme (UFR Temps et Territoires, Campus Porte des Alpes)[cite: 2].
 
-Pose-moi librement tes questions sur les stages, l'alternance (contrats, salaire, horaires), la rédaction de CV &amp; profil LinkedIn, la préparation aux entretiens ou enocre le déroulement du Master.</div>
+Pose-moi tes questions sur les **cours**, les **stages**, la **vie étudiante à Lyon** (logement, bourses, transports, campus) ou ton insertion professionnelle !</div>
   </div>
 
   <div class="quick">
-    <button type="button" onclick="askQuick('Stage ou alternance ?')">Stage vs Alternance</button>
+    <button type="button" onclick="askQuick('Où manger sur le campus et pour combien ?')">Où manger à Bron ?</button>
+    <button type="button" onclick="askQuick('Comment demander une bourse ou une aide financière ?')">Bourses &amp; Aides</button>
+    <button type="button" onclick="askQuick('Quel est le montant de la gratification de stage ?')">Gratification Stage</button>
+    <button type="button" onclick="askQuick('Comment trouver un logement étudiant à Lyon ?')">Logement &amp; CAF</button>
     <button type="button" onclick="askQuick('Comment améliorer mon CV ?')">Conseils CV</button>
-    <button type="button" onclick="askQuick('Comment me préparer pour un entretien ?')">Méthode Entretien</button>
-    <button type="button" onclick="askQuick('Quel est le salaire en alternance ?')">Salaire Alternance</button>
-    <button type="button" onclick="askQuick('Comment optimiser mon profil LinkedIn ?')">Profil LinkedIn</button>
   </div>
 
   <form id="chat">
@@ -219,73 +219,165 @@ Pose-moi librement tes questions sur les stages, l'alternance (contrats, salaire
   </form>
 </main>
 
-<footer>Master Tourisme · Université Lumière Lyon 2 · UFR Temps et Territoires</footer>
+<footer>Master Tourisme · Université Lumière Lyon 2 · UFR Temps et Territoires[cite: 2]</footer>
 </div>
 
 <script>
-// --- BASE DE CONNAISSANCES INTERACTIVE & ÉTOFFÉE ---
+// --- BASE DE CONNAISSANCES MAXIMALE ET ENRICHIE (M1, CAMPUS & VIE PRATIQUE) ---
 const faqDatabase = [
-  // ================= CATEGORIE 1 : STAGES (Modalités & Administration) =================
+  // ================= CATÉGORIE 1 : VIE SUR LE CAMPUS & BONS PLANS (PORTES DES ALPES) =================
+  {
+    id: "ou_manger",
+    title: "Où manger sur le campus et pour combien ?",
+    keywords: ["manger", "restaurant", "crous", "repas", "tarif", "prix", "food", "faim", "cafet", "restau u"],
+    patterns: ["ou manger sur le campus", "combien coute un repas au crous", "ou manger a porte des alpes"],
+    answer: "🍽️ **Où manger sur le campus Porte des Alpes (Bron) ?**\n\n" +
+            "1. **Le Resto U' et les cafétérias CROUS :** Situés au cœur du campus, ils proposent des formules repas complètes. Le tarif social est de **1,00 € pour les étudiants boursiers** et de **3,30 € pour les non-boursiers** (repas complet entrée/plat/dessert).\n" +
+            "2. **Cafétérias et vente à emporter :** Idéal pour un sandwich, une salade ou un café entre deux cours.\n" +
+            "3. **Bons plans / Extérieur :** Tu trouveras des options de restauration rapide autour du campus (notamment vers le pôle technologique) et des paniers anti-gaspillage via des applications comme *Too Good To Go* très pratiques dans le secteur de Bron."
+  },
+  {
+    id: "acces_campus",
+    title: "Se rendre sur le campus Porte des Alpes",
+    keywords: ["transport", "tcl", "tram", "venir", "acces", "metro", "bus", "campus", "bron"],
+    patterns: ["comment venir au campus", "prendre le tram tcl", "acces campus porte des alpes"],
+    answer: "🚇 **Comment se rendre au Campus Porte des Alpes (Bron) ?**\n\n" +
+            "• **Tramway TCL :** Lignes **T3** ou **T5** (arrêt *Parc Technologique* ou *Campus Porte des Alpes*).\n" +
+            "• **Vélo'v :** Des stations de vélos en libre-service sont disponibles directement sur le campus pour les adeptes des mobilités douces.\n" +
+            "• **Voiture / Covoiturage :** Des parkings étudiants sont accessibles, mais privilégier les transports en commun ou le covoiturage reste l'option la plus cohérente avec l'esprit de notre Master en développement durable !"
+  },
+  {
+    id: "bu_travail",
+    title: "Bibliothèque Universitaire et espaces de travail",
+    keywords: ["bu", "bibliotheque", "travailler", "reviser", "livres", "silence", "salle"],
+    patterns: ["ou reviser sur le campus", "bibliotheque universitaire lyon 2", "horaires bu porte des alpes"],
+    answer: "📚 **La BU (Bibliothèque Universitaire) Porte des Alpes :**\n\n" +
+            "• Un lieu central pour bosser seul·e ou en groupe (salles de travail en équipe réservables en ligne).\n" +
+            "• Une documentation très riche en géographie, aménagement, sciences sociales et **tourisme**.\n" +
+            "• Ouverte du lundi au samedi (les horaires précis varient selon les périodes de l'année et les vacances universitaires)."
+  },
+
+  // ================= CATÉGORIE 2 : BOURSES, AIDES FINANCIÈRES & LOGEMENT =================
+  {
+    id: "bourses_crous",
+    title: "Demander une bourse ou une aide financière (DSE)",
+    keywords: ["bourse", "bourses", "crous", "dse", "aide", "financier", "argent", "dossier social"],
+    patterns: ["comment demander une bourse", "faire un dossier crous", "aide financiere etudiant"],
+    answer: "💰 **Bourses sur critères sociaux (DSE) & Aides :**\n\n" +
+            "1. **Le Dossier Social Étudiant (DSE) :** C'est la démarche unique pour demander une bourse du CROUS et/ou un logement. Il se fait en ligne généralement entre **janvier et mai** pour la rentrée suivante sur le portail *etudiant.gouv.fr*.\n" +
+            "2. **Aides spécifiques d'urgence :** Si tu rencontres des difficultés financières passagères en cours d'année, le service social du CROUS de Lyon propose des FSD (Fonds de Solidarité et de Développement des Initiatives Étudiantes / aides ponctuelles)."
+  },
+  {
+    id: "logement_caf",
+    title: "Trouver un logement étudiant et toucher les APL",
+    keywords: ["logement", "caf", "apl", "chambre", "crous", "loyer", "aide au logement"],
+    patterns: ["comment trouver un logement etudiant", "toucher les apl lyon", "logement crous lyon 2"],
+    answer: "🏠 **Logement et Aides au logement (CAF) :**\n\n" +
+            "• **Logements CROUS :** Cités u ou résidences universitaires (demande via le DSE au printemps).\n" +
+            "• **Parc privé / Résidences privées :** Utilise des plateformes vérifiées (Lokaviz, GarantMe, etc.).\n" +
+            "• **Les APL (CAF) :** Dès que tu as ton bail et les clés, fais ta demande d'aide au logement en ligne sur le site de la CAF. C'est un coup de pouce mensuel précieux pour le paiement du loyer !"
+  },
+
+  // ================= CATÉGORIE 3 : ÉTUDES, EXAMENS & VIE PÉDAGOGIQUE =================
+  {
+    id: "validations_examens",
+    title: "Validation des semestres, notes et rattrapages",
+    keywords: ["examen", "partiel", "note", "valider", "semestre", "rattrapage", "compensation", "absence"],
+    patterns: ["comment valider son annee", "comment marchent les rattrapages", "absence aux examens"],
+    answer: "📝 **Évaluations, Notes et Rattrapages en M1 :**\n\n" +
+            "• **Validation :** Chaque semestre se valide avec une moyenne générale de 10/20 (compensation possible entre les unités d'enseignement selon les modalités de contrôle des connaissances - MCC).\n" +
+            "• **Assiduité :** La présence aux TD est obligatoire. En cas d'absence injustifiée, cela peut mener à une défaillance.\n" +
+            "• **Rattrapages :** Si un module ou un semestre n'est pas validé à la session 1, une session 2 (rattrapages) est organisée (généralement en juin ou fin de période selon le calendrier pédagogique). Renseigne-toi auprès de la scolarité de l'UFR Temps et Territoires."
+  },
+  {
+    id: "inscription_moodle",
+    title: "Accès Moodle et plateformes numériques",
+    keywords: ["moodle", "plateforme", "connexion", "ent", "mail", "compte", "wifi"],
+    patterns: ["comment acceder a moodle", "ou trouver les cours sur internet", "probleme connexion ent"],
+    answer: "💻 **Outils numériques de l'Université Lyon 2 :**\n\n" +
+            "• **L'ENT (Environnement Numérique de Travail) :** Ton portail central pour consulter ton emploi du temps, tes notes et ton mail étudiant.\n" +
+            "• **Moodle :** La plateforme pédagogique incontournable. C'est là que tes professeurs (dont M. Anthony Simon) déposent les supports de cours, les lectures obligatoires et la trame du **rapport d'étonnement**[cite: 1].\n" +
+            "• Pense à activer ton compte étudiant dès ton arrivée et à consulter ton mail Lyon 2 régulièrement !"
+  },
+
+  // ================= CATÉGORIE 4 : STAGES (Modalités & Administration) =================
   {
     id: "stage_obligatoire",
     title: "Obligation du stage en M1",
     keywords: ["obligatoire", "obliger", "valider", "m1", "ects", "credits", "validation"],
     patterns: ["le stage est il obligatoire", "est ce que le stage est obligatoire", "faut il faire un stage pour valider"],
-    answer: "📌 **Le stage est-il obligatoire pour valider le M1 ?**\n\nOui, la réalisation d’un stage est **obligatoire en M1**. Il te permet de valider les crédits ECTS associés à cette expérience professionnelle, tout en mettant en pratique les connaissances et compétences acquises durant ta formation[cite: 1]."
+    answer: "📌 **Le stage est-il obligatoire pour valider le M1 ?**\n\nOui, la réalisation d’un stage est **obligatoire en M1**[cite: 1]. Il te permet de valider les crédits ECTS associés à cette expérience professionnelle, tout en mettant en pratique les connaissances et compétences acquises durant ta formation[cite: 1]."
   },
   {
     id: "duree_minimale",
     title: "Durée minimale du stage",
     keywords: ["duree", "minimum", "minimale", "court", "mois"],
     patterns: ["quelle est la duree minimale du stage", "combien de temps au minimum", "duree mini stage"],
-    answer: "⏱️ **Durée minimale du stage**\n\nIl n’y a pas officiellement de durée minimale fixée[cite: 1]. Cependant, il est **fortement conseillé de faire un stage de plus de 2 mois** (plus de 308 heures) afin de bénéficier d’une gratification légale obligatoire et d’acquérir davantage d'autonomie[cite: 1]."
+    answer: "⏱️ **Durée minimale du stage**\n\nIl n’y a pas officiellement de durée minimale fixée[cite: 1]. Cependant, il est **fortement conseillé de faire un stage de plus de 2 mois** (soit plus de 308 heures de présence effectives) afin de bénéficier obligatoirement d’une gratification financière et d’acquérir davantage d'autonomie[cite: 1]."
   },
   {
     id: "duree_maximale",
     title: "Durée maximale du stage",
     keywords: ["duree", "maximum", "maximale", "limite", "mois", "long"],
     patterns: ["quelle est la duree maximale", "combien de mois maximum", "duree max stage"],
-    answer: "⏱️ **Durée maximale du stage**\n\nEn France, la durée d'un stage dans un même organisme est limitée à 6 mois par année d'enseignement[cite: 1]. Néanmoins, dans le cadre du M1, la durée recommandée est de **4 mois maximum** afin de ne pas empiéter sur les cours qui reprennent mi-septembre[cite: 1]."
+    answer: "⏱️ **Durée maximale du stage**\n\nEn France, la durée d'un stage dans un même organisme est limitée à 6 mois par année d'enseignement[cite: 1]. Néanmoins, dans le cadre du M1, la limite est de **4 mois maximum** afin de ne pas empiéter sur les cours qui reprennent mi-septembre[cite: 1]."
   },
   {
     id: "dates_debut",
     title: "Dates de début de stage",
     keywords: ["date", "limite", "debut", "commencer", "quand", "mai", "aout"],
     patterns: ["quand commencer le stage", "quelle est la date limite pour commencer", "debut du stage"],
-    answer: "📅 **Date limite pour commencer le stage**\n\nLe stage peut commencer **entre début mai et début août**[cite: 1]. Il est recommandé d'effectuer au minimum 2 mois pour acquérir davantage de connaissances et pouvoir être autonome[cite: 1]."
+    answer: "📅 **Date limite pour commencer le stage**\n\nLe stage peut commencer **entre début mai et début août**[cite: 1]. Il est recommandé d'effectuer au minimum 2 mois afin d’acquérir davantage de connaissances et de pouvoir être autonome[cite: 1]."
   },
   {
     id: "stage_etranger",
     title: "Stage à l'étranger",
     keywords: ["etranger", "international", "pays", "hors france", "expatriation"],
     patterns: ["puis je faire mon stage a l etranger", "faire un stage a l etranger", "stage a l international"],
-    answer: "🌍 **Stage à l'étranger**\n\nOui, tu peux réaliser ton stage à l’étranger tant que les missions correspondent au domaine du tourisme[cite: 1]. \n\n⚠️ Pense à bien te renseigner sur les démarches administratives spécifiques (visas, assurances)[cite: 1]. **Contacte le service des stages avant de commencer les démarches !**[cite: 1]"
+    answer: "🌍 **Stage à l'étranger**\n\nOui, tu peux réaliser ton stage à l’étranger tant que les missions correspondent au domaine du tourisme[cite: 1]. \n\n⚠️ Veille à bien te renseigner sur les démarches administratives spécifiques (visas, conventions particulières, assurances)[cite: 1]. **Contacte le service des stages avant de commencer tes démarches !**[cite: 1]"
   },
 
-  // ================= CATEGORIE 2 : ALTERNANCE & CONTRATS =================
+  // ================= CATÉGORIE 5 : GRATIFICATION ET RÉMUNÉRATION DU STAGE =================
+  {
+    id: "gratification_complete",
+    title: "Gratification et Rémunération complète du Stage",
+    keywords: ["gratification", "remuneration", "paye", "salaire", "montant", "taux", "horaire", "308", "heures", "2 mois", "obligatoire", "impôt", "cotisation"],
+    patterns: [
+      "le stage est il obligatoirement remunere",
+      "quel est le montant de la gratification",
+      "combien est paye un stagiaire",
+      "quelles sont les regles de remuneration des stages",
+      "combien touche t on en stage"
+    ],
+    answer: "💶 **Réglementation complète de la gratification de stage en France :**\n\n" +
+            "1. **Obligation légale :** La gratification est **obligatoire** dès lors que la présence du stagiaire est supérieure à **2 mois consécutifs ou non** au cours d’une même année scolaire (soit à partir de la **309ᵉ heure** de présence effective)[cite: 1]. En dessous de 308 heures incluses, elle reste facultative[cite: 1].\n\n" +
+            "2. **Calcul et montant minimum :** Le montant légal minimal est calculé sur la base d'un taux horaire égal à **15 % du plafond horaire de la sécurité sociale** (soit environ 4,35 € à 4,50 € / heure selon la mise à jour annuelle)[cite: 1].\n" +
+            "   *Pour un mois complet à 35h/semaine (154h), cela représente un minimum d'environ **670 € à 693 € net / mois**.*\n\n" +
+            "3. **Modalités de versement :** Dès que le stage dépasse 2 mois, la gratification est due **dès la 1ʳᵉ heure du 1ᵉʳ mois** de stage (et pas seulement à partir du 3ᵉ mois) ! Elle doit être versée mensuellement.\n\n" +
+            "4. **Restauration et Transports :**\n" +
+            "   • **Tickets-restaurant :** Le stagiaire y a accès dans les mêmes conditions que les salariés de l'entreprise.\n" +
+            "   • **Transports publics :** Remboursement obligatoire d'au moins **50 % des frais de titre de transport** collectif pour le trajet domicile-travail.\n\n" +
+            "5. **Fiscalité et Cotisations :** La gratification minimale est **exonérée de cotisations sociales** (pour l'entreprise et l'étudiant) et n'est **pas soumise à l'impôt sur le revenu** (dans la limite du montant annuel du SMIC).\n\n" +
+            "⚠️ *Remarque : À l'étranger, les règles dépendent exclusivement de la législation du pays d'accueil !*[cite: 1]"
+  },
+
+  // ================= CATÉGORIE 6 : ALTERNANCE & CONTRATS =================
   {
     id: "stage_vs_alternance",
     title: "Différence Stage vs Alternance",
     keywords: ["alternance", "apprentissage", "professionnalisation", "difference", "contrat", "statut"],
     patterns: ["difference entre stage et alternance", "faut il faire de l alternance", "alternance ou stage"],
-    answer: "🔄 **Stage vs Alternance : quelles différences ?**\n\n• **Stage :** Statut d'étudiant. Rémunéré par une *gratification* (si > 2 mois). Convention tripartie[cite: 1].\n• **Alternance (Apprentissage ou Pro) :** Statut de salarié de l'entreprise. Vrai *salaire* mensuel (pourcentage du SMIC), congés payés légaux (5 semaines), cotisations retraite & chômage.\n\n⚠️ *Vérifie auprès du responsable de formation (M. Simon) la possibilité et le rythme d'alternance selon l'année (M1/M2) !*"
+    answer: "🔄 **Stage vs Alternance : quelles différences ?**\n\n• **Stage :** Statut d'étudiant. Rémunéré par une *gratification* (si > 2 mois). Convention tripartite[cite: 1].\n• **Alternance (Apprentissage ou Pro) :** Statut de salarié. Vrai *salaire* mensuel (pourcentage du SMIC selon l'âge), congés payés légaux (5 semaines), cotisations retraite & chômage.\n\n⚠️ *Vérifie auprès du responsable de formation (M. Simon) la possibilité et le rythme d'alternance selon ton année d'études !*"
   },
   {
     id: "salaire_alternance",
     title: "Rémunération & Salaire en Alternance",
     keywords: ["salaire", "alternance", "remuneration", "paye", "smic", "pourcentage", "brut", "net"],
     patterns: ["quel est le salaire en alternance", "combien gagne un alternant", "remuneration apprentissage"],
-    answer: "💰 **Rémunération en Alternance**\n\nEn contrat d'apprentissage, la rémunération dépend de ton âge et de ton année d'études :\n• **18 à 20 ans :** ~43% à 51% du SMIC en 1re année, ~61% en 2e année.\n• **21 à 25 ans :** ~53% à 61% du SMIC en 1re année, ~65% en 2e année.\n• **26 ans et plus :** 100% du SMIC (ou du salaire minimum conventionnel).\n\n*Bonus : L'alternant ne paye pas de cotisations sociales sur son salaire net dans la plupart des cas.*"
-  },
-  {
-    id: "temps_travail_alternance",
-    title: "Temps de travail et congés en alternance",
-    keywords: ["temps", "travail", "heures", "35h", "conges", "vacances", "rtt"],
-    patterns: ["combien d heures travaille un alternant", "a t on des vacances en alternance"],
-    answer: "⏰ **Temps de travail & Congés en Alternance**\n\n• **Temps de travail :** Tu es soumis au régime légal de 35h par semaine (ou accord d'entreprise avec RTT).\n• **Congés payés :** Tu as droit à 2,5 jours ouvrables de congés par mois travaillé (5 semaines par an), tout comme les autres salariés de l'entreprise.\n• Tu n'as plus les vacances universitaires classiques : les semaines d'examen/cours sont du temps de travail effectif."
+    answer: "💰 **Rémunération en Alternance**\n\nEn contrat d'apprentissage, le salaire dépend de ton âge et de ton niveau d'études :\n• **18 à 20 ans :** ~43% à 51% du SMIC en 1ʳᵉ année, ~61% en 2ᵉ année.\n• **21 à 25 ans :** ~53% à 61% du SMIC en 1ʳᵉ année, ~65% en 2ᵉ année.\n• **26 ans et plus :** 100% du SMIC (ou de la grille conventionnelle).\n\n*Précision : L'apprenti bénéficie d'une exonération de cotisations salariales sur la part de rémunération inférieure ou égale à 79 % du SMIC.*"
   },
 
-  // ================= CATEGORIE 3 : CONVENTIONS & DÉMARCHES =================
+  // ================= CATÉGORIE 7 : CONVENTIONS & DÉMARCHES =================
   {
     id: "obtenir_convention",
     title: "Obtenir sa convention de stage",
@@ -298,94 +390,80 @@ const faqDatabase = [
     title: "Délai de traitement de la convention",
     keywords: ["delai", "temps", "traitement", "valider", "jours", "anticipation"],
     patterns: ["quel est le delai de traitement", "combien de temps prend la convention"],
-    answer: "⏳ **Délai de traitement d'une convention**\n\nLe délai dépend du service administratif et du nombre de demandes[cite: 1]. Compte **plusieurs jours ouvrés** et anticipe au maximum ta demande avant ta date de début de stage ![cite: 1]"
+    answer: "⏳ **Délai de traitement d'une convention**\n\nLe délai dépend du service administratif et du volume de demandes en cours[cite: 1]. Prévois **plusieurs jours ouvrés** et anticipe au maximum ta demande avant ta date de début de stage ![cite: 1]"
   },
 
-  // ================= CATEGORIE 4 : GRATIFICATION & DROITS STAGE =================
+  // ================= CATÉGORIE 8 : OÙ CHERCHER UN STAGE / EMPLOI TOURISME =================
   {
-    id: "stage_remunere",
-    title: "Gratification obligatoire ?",
-    keywords: ["gratification", "remunere", "paye", "salaire", "308", "heures", "2 mois", "cdd"],
-    patterns: ["le stage est il obligatoirement remunere", "est ce qu on est paye en stage"],
-    answer: "💶 **Le stage est-il obligatoirement rémunéré ?**\n\nEn France, la gratification est **obligatoire** dès que la durée du stage dépasse 2 mois consécutifs (plus de 308 heures de présence)[cite: 1]. En dessous de ce seuil, elle reste facultative[cite: 1].\n\n💡 *Astuce :* Négocie lors de l'entretien 4 mois gratifiés, ou bien 2 mois de stage non rémunérés suivis de 2 mois en job saisonnier (CDD)[cite: 1].\n*Attention : à l'étranger, les règles dépendent du pays d'accueil !*[cite: 1]"
-  },
-  {
-    id: "montant_gratification",
-    title: "Montant de la gratification",
-    keywords: ["montant", "combien", "taux", "horaire", "4.50", "tarif", "remuneration"],
-    patterns: ["quel est le montant minimum de la gratification", "combien touche un stagiaire"],
-    answer: "💰 **Quel est le montant minimum de la gratification ?**\n\nLe montant minimum légal est calculé sur un taux horaire[cite: 1]. Pour **2026**, la gratification minimale des stagiaires en France s'élève à **4,50 € / heure** de présence effective[cite: 1]. Consulte *Service-Public.fr* pour connaître le taux exact en vigueur[cite: 1]."
-  },
-  {
-    id: "conges_horaires",
-    title: "Congés et horaires de stage",
-    keywords: ["conges", "vacances", "absence", "horaires", "week-end", "ferie", "repos"],
-    patterns: ["ai je droit a des conges", "quels sont mes horaires", "travailler le week end"],
-    answer: "🏖️ **Congés et horaires de travail en stage**\n\n• **Congés :** Pour les stages de plus de 2 mois, la convention doit prévoir la possibilité de congés et d'absences (à négocier avec l'entreprise)[cite: 1].\n• **Horaires :** Définis dans la convention[cite: 1]. Tu dois respecter la réglementation de l'entreprise et les repos légaux[cite: 1]. Tu as le droit de demander un aménagement si nécessaire[cite: 1]."
+    id: "ou_chercher_stage",
+    title: "Où trouver des offres de stage en tourisme",
+    keywords: ["trouver", "offres", "plateforme", "site", "ou chercher", "job", "reseau", "offices de tourisme"],
+    patterns: ["ou trouver des offres de stage en tourisme", "sur quels sites chercher un stage", "plateformes offres tourisme"],
+    answer: "🔍 **Où chercher ton stage ou ton alternance en tourisme durable ?**\n\n1. **Plateformes spécialisées Tourisme :**\n   • *TourMaG*, *L'Echo Touristique* (rubriques emploi).\n   • *JobTeaser* (partenaire de l'Université Lyon 2).\n2. **Institutions & Collectivités :**\n   • Sites des Offices de Tourisme (OT), comités départementaux/régionaux du tourisme (CDT, CRTL).\n   • Plateformes des parcs naturels régionaux (PNR) et collectivités territoriales.\n3. **Réseaux & Généralistes :**\n   • *LinkedIn* (en ciblant les chargés de mission RSE, directeurs d'OT).\n   • *Indeed*, *Glassdoor*, *WTTJ* (Welcome to the Jungle) avec les mots-clés « tourisme durable », « ecotourisme », « transition écologique »."
   },
 
-  // ================= CATEGORIE 5 : CONSEILS CV & PROFIL PROFESSIONNEL =================
+  // ================= CATÉGORIE 9 : CONSEILS CV & PROFIL PROFESSIONNEL =================
   {
     id: "ameliorer_cv",
     title: "Améliorer son CV pour le Tourisme",
     keywords: ["cv", "curriculum", "rubrique", "competences", "mise en page", "design", "rediger"],
     patterns: ["comment ameliorer mon cv", "comment faire un bon cv", "conseils cv tourisme"],
-    answer: "📄 **Comment créer un CV percutant dans le tourisme ?**\n\n1. **Titre clair :** Indique le poste visé (ex: *« Stagiaire Chargé·e de Développement Touristique Durable »*).\n2. **Structure aérée :** 1 page maximum ! Utilise des rubriques nettes : Expériences, Formation, Compétences (outils web, data, langues), Langues parlées.\n3. **Missions concrètes :** Utilise des verbes d'action (*« Conçu une offre écotouristique », « Analysé la fréquentation »*).\n4. **Compétences durables :** Valorise tes connaissances en RSO, gestion de projet, éco-conception ou marketing territorial[cite: 2, 4, 5].\n5. **Design :** Utilise des teintes sobres et professionnelles (ex: vert/beige nature)."
+    answer: "📄 **Comment créer un CV percutant dans le tourisme ?**\n\n1. **Titre clair :** Indique le poste visé (ex: *« Stagiaire Chargé·e de Développement Touristique Durable »*).\n2. **Structure aérée :** 1 page maximum ! Rubriques nettes : Expériences, Formation, Compétences (outils web, data, langues), Langues parlées.\n3. **Missions concrètes :** Utilise des verbes d'action (*« Conçu une offre écotouristique », « Analysé la fréquentation »*).\n4. **Compétences durables :** Valorise tes connaissances en RSE, gestion de projet, éco-conception ou marketing territorial[cite: 2, 4, 5].\n5. **Design :** Utilise des teintes sobres et professionnelles (ex: vert/beige nature)."
   },
   {
     id: "optimiser_linkedin",
     title: "Optimiser son profil LinkedIn",
     keywords: ["linkedin", "profil", "reseau", "social", "e-reputation", "titre", "photo"],
     patterns: ["comment optimiser mon profil linkedin", "que mettre sur linkedin", "conseils linkedin"],
-    answer: "🌐 **Optimiser son profil LinkedIn étudiant**\n\n• **Titre accrocheur :** Ne mets pas juste *« Étudiant à Lyon 2 »*, mais plutôt *« Étudiant Master Tourisme Durable | À la recherche d'un stage de 4 mois dès Mai »*.\n• **Photo professionnelle :** Souriante, fond neutre, tenue soignée.\n• **Section « À propos » :** Raconte brièvement ton projet : ce qui te passionne dans le tourisme responsable et ce que tu apportes.\n• **Compétences & Réseau :** Ajoute tes camarades, professeurs, et suivez les Offices de Tourisme, CDT et agences du secteur."
+    answer: "🌐 **Optimiser son profil LinkedIn étudiant**\n\n• **Titre accrocheur :** Ne mets pas uniquement *« Étudiant à Lyon 2 »*, privilégie : *« Étudiant Master Tourisme Durable | À la recherche d'un stage de 4 mois dès Mai »*.\n• **Photo professionnelle :** Souriante, fond neutre, tenue soignée.\n• **Section « À propos » :** Raconte brièvement ton projet : tes passions dans le tourisme responsable et ce que tu souhaites apporter.\n• **Réseau :** Connecte-toi avec tes camarades, enseignants, et suis les Offices de Tourisme, CDT et agences du secteur."
   },
   {
     id: "lettre_motivation",
     title: "Rédiger sa lettre de motivation",
     keywords: ["lettre", "motivation", "candidature", "mail", "rediger"],
     patterns: ["comment faire une lettre de motivation", "rediger lettre motivation"],
-    answer: "✉️ **Structure gagnante de la lettre de motivation (Vous / Moi / Nous)**\n\n1. **VOUS (La structure) :** Pourquoi cette entreprise ou destination t'intéresse (actualité, engagement durable).\n2. **MOI (Ton profil) :** Relie tes cours au Master Tourisme et tes expériences aux besoins du poste.\n3. **NOUS (La collaboration) :** Ce que vous allez accomplir ensemble durant le stage.\n\n*Conseil : Évite les pavés. 3 à 4 paragraphes max, ciblés et sans fautes d'orthographe !*"
+    answer: "✉️ **Structure gagnante de la lettre de motivation (Vous / Moi / Nous)**\n\n1. **VOUS (La structure) :** Pourquoi cette entreprise ou destination t'intéresse (actualité, engagements durables).\n2. **MOI (Ton profil) :** Relie tes cours au Master Tourisme et tes expériences aux besoins du poste.\n3. **NOUS (La collaboration) :** Ce que vous allez accomplir ensemble durant le stage.\n\n*Conseil : Évite les pavés. 3 à 4 paragraphes max, ciblés et irréprochables sur l'orthographe !*"
   },
 
-  // ================= CATEGORIE 6 : PRÉPARATION AUX ENTRETIENS =================
+  // ================= CATÉGORIE 10 : PRÉPARATION AUX ENTRETIENS =================
   {
     id: "preparer_entretien",
     title: "Préparer un entretien professionnel",
     keywords: ["entretien", "recrutement", "recruteur", "oral", "repondre", "star", "methode"],
     patterns: ["comment preparer un entretien", "conseils pour entretien de recrutement", "methode entretien"],
-    answer: "🎯 **Méthode d'excellence pour préparer ton entretien**\n\n1. **Renseigne-toi sur la structure :** Produits/destinations, valeurs, engagements durables, actualités récentes.\n2. **Prépare ton « Pitch » (2 min) :** Qui tu es, ton parcours en Master Tourisme Lyon 2, et pourquoi ce poste[cite: 1, 2].\n3. **Utilise la méthode S.T.A.R. pour illustrer tes compétences :**\n   • **S**ituation : Le contexte d'un projet passé.\n   • **T**âche : L'objectif ou le problème.\n   • **A**ction : Ce que TU as mis en œuvre.\n   • **R**ésultat : Ce que ça a apporté (chiffres, succès, apprentissage).\n4. **Prépare 2 ou 3 questions :** Pose des questions sur l'équipe, les défis à venir ou la démarche RSE de l'entreprise."
+    answer: "🎯 **Méthode d'excellence pour préparer ton entretien**\n\n1. **Renseigne-toi sur la structure :** Offres/destinations, valeurs, engagements durables, actualités récentes.\n2. **Prépare ton « Pitch » (2 min) :** Qui tu es, ton parcours en Master Tourisme à Lyon 2, et pourquoi ce poste[cite: 1, 2].\n3. **Utilise la méthode S.T.A.R. pour illustrer tes compétences :**\n   • **S**ituation : Le contexte d'un projet passé.\n   • **T**âche : L'objectif ou la difficulté rencontrée.\n   • **A**ction : Ce que TU as mis en œuvre.\n   • **R**ésultat : Ce que cela a apporté (chiffres, succès, enseignements).\n4. **Prépare 2 ou 3 questions :** Pose des questions sur l'équipe, les défis à venir ou la démarche RSE."
   },
   {
     id: "posture_suivi_entretien",
     title: "Posture & Suivi d'entretien",
     keywords: ["posture", "suivi", "remerciement", "relance", "mail de remerciement", "stress"],
     patterns: ["que faire apres un entretien", "envoyer un mail de remerciement"],
-    answer: "🤝 **Posture pendant & après l'entretien**\n\n• **Pendant :** Adopte une posture d'écoute active, prends des notes, reste naturel(le) et montre ton enthousiasme pour le tourisme durable[cite: 1, 2].\n• **Après (Dans les 24h) :** Envoie un **mail de remerciement** court : reconfirme ton intérêt pour le poste, rappelle 1 ou 2 points clés abordés et remercie l'interlocuteur pour son temps.\n• **Relance :** Si tu n'as pas de retour après la date convenue, relance poliment par mail ou téléphone au bout de 7 à 10 jours."
+    answer: "🤝 **Posture pendant & après l'entretien**\n\n• **Pendant :** Écoute active, prise de notes, attitude naturelle et enthousiasme marqué pour le tourisme durable[cite: 1, 2].\n• **Après (Dans les 24h) :** Envoie un **mail de remerciement** court : réaffirme ton intérêt pour le poste, rappelle 1 ou 2 points clés abordés et remercie ton interlocuteur pour son temps.\n• **Relance :** Sans retour de leur part après la date convenue, relance poliment par mail ou téléphone au bout de 7 à 10 jours."
   },
 
-  // ================= CATEGORIE 7 : RAPPORT DE STAGE =================
+  // ================= CATÉGORIE 11 : RAPPORT DE STAGE =================
   {
     id: "rapport_etonnement",
     title: "Le rapport d'étonnement",
     keywords: ["rapport", "etonnement", "pages", "moodle", "critique", "preconisation", "trame"],
     patterns: ["qu est ce qu un rapport d etonnement", "comment faire le rapport de stage"],
-    answer: "📝 **Le rapport d’étonnement (M1)**\n\nDocument d'environ **10 pages** articulé ainsi :\n1. Présentation de la structure\n2. Missions confiées\n3. Étonnements & constats critiques (très important !)\n4. Préconisations opérationnelles[cite: 1]\n\n💡 La trame complète est accessible sur **Moodle**[cite: 1]. Sois constructif et analytique dans tes remarques[cite: 1]."
+    answer: "📝 **Le rapport d’étonnement (M1)**\n\nDocument d'environ **10 pages** structuré ainsi :\n1. Présentation de la structure\n2. Missions confiées\n3. Étonnements & constats critiques (très important !)\n4. Préconisations opérationnelles[cite: 1]\n\n💡 La trame complète est téléchargeable sur **Moodle**[cite: 1]. Sois constructif et analytique dans tes remarques[cite: 1]."
   },
   {
     id: "depot_rapport",
     title: "Dépôt et soutenance du rapport",
     keywords: ["depot", "date", "rendu", "soutenance", "oral", "juillet", "mail", "pdf"],
     patterns: ["quand rendre le rapport", "ou deposer le rapport", "y a t il une soutenance"],
-    answer: "📅 **Dépôt & Soutenance du rapport**\n\n• **Date :** Rendu prévu **début juillet** par e-mail en PDF à ton tuteur pédagogique[cite: 1].\n• **Soutenance :** Aucune soutenance orale n'est demandée pour ce rapport de M1[cite: 1]."
+    answer: "📅 **Dépôt & Soutenance du rapport**\n\n• **Date :** Rendu prévu **début juillet** par e-mail en format PDF à ton tuteur pédagogique[cite: 1].\n• **Soutenance :** Aucune soutenance orale n'est demandée pour ce rapport de M1[cite: 1]."
   },
 
-  // ================= CATEGORIE 8 : INFORMATIONS MASTER =================
+  // ================= CATÉGORIE 12 : INFORMATIONS MASTER & RESPONSABLE =================
   {
     id: "infos_master",
     title: "Présentation du Master Tourisme",
     keywords: ["master", "presentation", "lyon 2", "porte des alpes", "ufr", "temps et territoires", "durabilite"],
     patterns: ["presenter le master", "c est quoi ce master", "ou ont lieu les cours"],
-    answer: "🎓 **Master Management Durable du Tourisme**\n\nRattaché à l'**UFR Temps et Territoires** (Campus Porte des Alpes, Lyon 2), le Master forme des cadres experts en marketing territorial, valorisation des patrimoines et transition écologique du tourisme[cite: 2]."
+    answer: "🎓 **Master Management Durable du Tourisme**\n\nRattaché à l'**UFR Temps et Territoires** sur le **Campus Porte des Alpes (Bron)** de l'Université Lumière Lyon 2, le Master forme des cadres experts en marketing territorial, valorisation des patrimoines et transition écologique du tourisme[cite: 2]."
   },
   {
     id: "responsable_master",
@@ -399,7 +477,14 @@ const faqDatabase = [
     title: "Débouchés professionnels",
     keywords: ["metier", "metiers", "debouche", "debouches", "travail", "emploi", "apres"],
     patterns: ["quels sont les debouches", "quels metiers apres le master"],
-    answer: "💼 **Débouchés professionnels après le Master**\n\n• Chargé·e de mission tourisme / développement territorial (collectivités, OT)[cite: 5]\n• Concepteur·rice de produits touristiques (agences, tour-opérateurs)[cite: 5]\n• Chargé·e de promotion, communication & webmarketing touristique[cite: 5]\n• Chargé·e d'études et d'ingénierie / consultant junior[cite: 5]\n• Responsable tourisme responsable ou démarches de labellisation RSE[cite: 6]\n*(Évolution possible vers direction d'OT ou d'établissement touristique)*[cite: 6]"
+    answer: "💼 **Débouchés professionnels après le Master**\n\n• Chargé·e de mission tourisme / développement territorial (collectivités, OT)[cite: 5]\n• Concepteur·rice de produits touristiques (agences, tour-opérateurs)[cite: 5]\n• Chargé·e de promotion, communication & webmarketing touristique[cite: 5]\n• Chargé·e d'études et d'ingénierie / consultant junior[cite: 5]\n• Responsable tourisme responsable ou démarches de labellisation RSE[cite: 6]\n*(Évolution possible vers la direction d'OT ou d'établissement touristique après 3 à 5 ans)*[cite: 6]"
+  },
+  {
+    id: "sante_soutien",
+    title: "Santé, Handicap et Soutien Étudiant",
+    keywords: ["sante", "handicap", "psychologue", "aide", "sse", "malade", "ecoute"],
+    patterns: ["qui contacter en cas de probleme de sante", "aide psychologique lyon 2", "handicap universite"],
+    answer: "🩺 **Santé & Accompagnement à Lyon 2**\n\n• **SSE (Service de Santé Étudiante) :** Consultations médicales, infirmerie et soutien psychologique gratuits pour les étudiants.\n• **Mission Handicap :** Accompagnement spécifique et aménagement des études/examens pour les étudiants en situation de handicap.\n• N'hésite pas à te rapprocher de la scolarité de l'UFR Temps et Territoires pour toute situation particulière."
   }
 ];
 
@@ -509,8 +594,8 @@ function handleSearch(query) {
       addMessage(html, "bot", true);
     } 
     else {
-      // MESSAGE PERSONNALISÉ DEMANDÉ
-      const fallback = "Oops, je suis actuellement au Puy du Fou et pourra que vous repondre lors de mon retour";
+      // MESSAGE EXIGÉ DU PUY DU FOU
+      const fallback = "Oops, je suis actuellement au Puy du Fou et ne pourrai vous répondre qu'à mon retour.";
       addMessage(fallback, "bot");
     }
   }, 400);
