@@ -210,9 +210,9 @@ footer{
 
 <main class="panel">
   <div id="messages" aria-live="polite">
-    <div class="msg bot">Bonjour ! 👋 Je suis Mr Simon, ton assistant virtuel pour le Master Management Durable du Tourisme (UFR Temps et Territoires, Campus Porte des Alpes).
+    <div class="msg bot">Bonjour ! 👋 Je suis **Mr Simon**, ton assistant virtuel pour le Master Management Durable du Tourisme (UFR Temps et Territoires, Campus Porte des Alpes).
 
-Pose-moi tes questions sur les cours, les stages, la vie étudiante à Lyon (logement, bourses, transports, campus) ou ton insertion professionnelle !</div>
+Pose-moi tes questions sur les **cours**, les **stages**, la **vie étudiante à Lyon** (logement, bourses, transports, campus) ou ton insertion professionnelle !</div>
   </div>
 
   <div class="quick">
@@ -360,3 +360,137 @@ const faqDatabase = [
   {
     id: "infos_master",
     title: "Présentation du Master & Contact Responsable",
+    keywords: ["master", "presentation", "ufr", "temps et territoires", "anthony", "simon"],
+    patterns: ["presenter le master", "qui est le responsable du master"],
+    answer: "🎓 **Master Management Durable du Tourisme :**\n\nDispensé à l'**UFR Temps et Territoires** (Campus Porte des Alpes).\n👤 **Responsable :** M. Anthony Simon (anthony.simon@univ-lyon2.fr)\nRetrouve la présentation officielle sur le site de l'[UFR Temps et Territoires](https://tt.univ-lyon2.fr/)."
+  }
+];
+
+// --- MOTEUR NLP & FORMATAGE DE TEXTE ---
+const STOP_WORDS = new Set(["le","la","les","l","un","une","des","du","de","d","ce","c","a","au","aux","en","pour","par","sur","dans","avec","et","ou","est","son","sa","ses","mon","ma","mes","ta","ton","tes","tu","il","elle","nous","vous","ils","elles","qui","que","quoi","quand","ou","comment","pourquoi","faut","faire","avoir"]);
+
+function tokenize(text) {
+  return text
+    .toLowerCase()
+    .normalize("NFD").replace(/[\u0300-\u036f]/g, "")
+    .replace(/[^a-z0-9\s]/g, " ")
+    .split(/\s+/)
+    .filter(w => w.length > 1 && !STOP_WORDS.has(w));
+}
+
+function calculateScore(userTokens, item) {
+  let score = 0;
+  const userTextNormalized = userTokens.join(" ");
+
+  for (let pattern of item.patterns) {
+    const patNorm = pattern.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+    if (userTextNormalized.includes(patNorm)) score += 15;
+  }
+
+  for (let token of userTokens) {
+    for (let kw of item.keywords) {
+      const kwNorm = kw.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+      if (token === kwNorm) {
+        score += 4;
+      } else if (token.startsWith(kwNorm) || kwNorm.startsWith(token)) {
+        if (token.length > 3 && kwNorm.length > 3) score += 2;
+      }
+    }
+  }
+
+  return score;
+}
+
+function getBestMatches(userQuery) {
+  const tokens = tokenize(userQuery);
+  if (tokens.length === 0) return [];
+
+  const scored = faqDatabase.map(item => ({
+    item: item,
+    score: calculateScore(tokens, item)
+  }));
+
+  scored.sort((a, b) => b.score - a.score);
+  return scored.filter(s => s.score > 0);
+}
+
+function parseMarkdown(text) {
+  let html = text
+    .replace(/\n/g, "<br>")
+    .replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>")
+    .replace(/\*(.*?)\*/g, "<em>$1</em>")
+    .replace(/\[(.*?)\]\((.*?)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer">$1</a>');
+  return html;
+}
+
+// --- INTERFACE CHAT ---
+const messages = document.getElementById("messages");
+const form = document.getElementById("chat");
+const input = document.getElementById("question");
+
+function addMessage(content, sender, isHTML = false) {
+  const msgDiv = document.createElement("div");
+  msgDiv.className = `msg ${sender}`;
+  if (isHTML) {
+    msgDiv.innerHTML = content;
+  } else {
+    msgDiv.innerHTML = parseMarkdown(content);
+  }
+  messages.appendChild(msgDiv);
+  messages.scrollTop = messages.scrollHeight;
+}
+
+function showTypingIndicator() {
+  const typingDiv = document.createElement("div");
+  typingDiv.id = "typing-indicator";
+  typingDiv.className = "msg bot typing";
+  typingDiv.textContent = "Simon réfléchit...";
+  messages.appendChild(typingDiv);
+  messages.scrollTop = messages.scrollHeight;
+}
+
+function removeTypingIndicator() {
+  const indicator = document.getElementById("typing-indicator");
+  if (indicator) indicator.remove();
+}
+
+function handleSearch(query) {
+  if (!query.trim()) return;
+
+  addMessage(query, "user");
+  input.value = "";
+  showTypingIndicator();
+
+  setTimeout(() => {
+    removeTypingIndicator();
+    const results = getBestMatches(query);
+
+    if (results.length > 0 && results[0].score >= 4) {
+      addMessage(results[0].item.answer, "bot");
+    } 
+    else if (results.length > 0 && results[0].score >= 2) {
+      let html = "🤔 Je n'ai pas trouvé la réponse exacte, mais voici des sujets proches :<div class='suggestions-box'>";
+      results.slice(0, 3).forEach(r => {
+        html += `<button class='suggestion-btn' onclick="askQuick('${r.item.patterns[0] || r.item.title}')">${r.item.title}</button>`;
+      });
+      html += "</div>";
+      addMessage(html, "bot", true);
+    } 
+    else {
+      const fallback = "Oops, je suis actuellement au Puy du Fou et ne pourrai vous répondre qu'à mon retour.";
+      addMessage(fallback, "bot");
+    }
+  }, 400);
+}
+
+function askQuick(qText) {
+  handleSearch(qText);
+}
+
+form.addEventListener("submit", e => {
+  e.preventDefault();
+  handleSearch(input.value);
+});
+</script>
+</body>
+</html>
