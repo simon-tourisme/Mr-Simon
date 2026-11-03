@@ -233,7 +233,7 @@ Pose-moi tes questions sur les **cours**, les **stages**, la **vie étudiante à
 </div>
 
 <script>
-// --- BASE DE CONNAISSANCES COMPLÈTE & HYPERLIENS OFFICIELS ---
+// --- BASE DE CONNAISSANCES COMPLÈTE & HYPERLIENS OFFICIELS (NETTOYÉE) ---
 const faqDatabase = [
   // ================= CATÉGORIE 1 : VIE SUR LE CAMPUS & BONS PLANS (PORTES DES ALPES) =================
   {
@@ -287,11 +287,76 @@ const faqDatabase = [
             "• **Aides au logement :** Fais ta demande d'APL directement sur le site de la [CAF](https://www.caf.fr/) dès la signature de ton bail."
   },
 
-  // ================= CATÉGORIE 3 : ÉTUDES, EXAMENS & PLATFORMES =================
+  // ================= CATÉGORIE 3 : ÉTUDES, EXAMENS & PLATEFORMES =================
   {
     id: "validations_examens",
     title: "Validation des semestres, notes et rattrapages",
     keywords: ["examen", "partiel", "note", "valider", "semestre", "rattrapage", "compensation", "absence"],
     patterns: ["comment valider son annee", "comment marchent les rattrapages", "absence aux examens"],
     answer: "📝 **Évaluations et Rattrapages en M1 :**\n\n" +
-            "• **Validation :** Moyenne générale de 10/20 par semestre (sel
+            "• **Validation :** Moyenne générale de 10/20 par semestre (selon les MCC de la formation).\n" +
+            "• **Assiduité :** La présence aux TD est obligatoire sous peine de défaillance.\n" +
+            "• **Rattrapages :** Organisés en session 2 pour les modules non validés."
+  },
+  {
+    id: "inscription_moodle",
+    title: "Accès Moodle et plateformes numériques",
+    keywords: ["moodle", "plateforme", "connexion", "ent", "mail", "compte", "wifi"],
+    patterns: ["comment acceder a moodle", "ou trouver les cours sur internet", "probleme connexion ent"],
+    answer: "💻 **Outils numériques de l'Université Lyon 2 :**\n\n" +
+            "• **L'ENT :** Ton portail central ([ENT Lyon 2](https://ent.univ-lyon2.fr/)) pour consulter ton emploi du temps et ta messagerie.\n" +
+            "• **Moodle :** Télécharge les cours et la trame du rapport sur [Moodle Lyon 2](https://moodle.univ-lyon2.fr/)."
+  },
+
+  // ================= CATÉGORIE 4 : STAGES & CONVENTIONS =================
+  {
+    id: "stage_obligatoire",
+    title: "Obligation du stage en M1",
+    keywords: ["obligatoire", "obliger", "valider", "m1", "ects", "credits", "validation"],
+    patterns: ["le stage est il obligatoire", "est ce que le stage est obligatoire", "faut il faire un stage pour valider"],
+    answer: "📌 **Le stage est-il obligatoire pour valider le M1 ?**\n\nOui, la réalisation d’un stage est **obligatoire en M1**. Il permet de valider les crédits ECTS associés et de mettre en pratique tes compétences sur le terrain."
+  },
+  {
+    id: "duree_stage",
+    title: "Durée du stage en M1",
+    keywords: ["duree", "minimum", "maximum", "limite", "mois"],
+    patterns: ["quelle est la duree du stage", "combien de mois maximum"],
+    answer: "⏱️ **Durée du stage :**\n\n• **Conseillé :** Plus de 2 mois (308 heures) pour bénéficier d'une gratification obligatoire.\n• **Maximum :** 4 mois maximum en M1 afin de ne pas empiéter sur la reprise des cours mi-septembre."
+  },
+  {
+    id: "gratification_complete",
+    title: "Gratification et Rémunération complète du Stage",
+    keywords: ["gratification", "remuneration", "paye", "salaire", "montant", "taux", "horaire", "308", "heures", "2 mois"],
+    patterns: ["le stage est il obligatoirement remunere", "quel est le montant de la gratification", "combien est paye un stagiaire"],
+    answer: "💶 **Réglementation de la gratification de stage :**\n\n" +
+            "1. **Obligation :** Dès que le stage dépasse **2 mois (308h)**, la gratification est obligatoire dès la 1ʳᵉ heure.\n" +
+            "2. **Montant minimum :** Fixé à 15% du plafond horaire de la sécurité sociale (env. **4,35 € à 4,50 € / heure**, soit ~670 € à 690 €/mois pour 154h).\n" +
+            "3. **Avantages :** Accès aux tickets-resto et prise en charge d'au moins **50% des transports publics**.\n" +
+            "Retrouve le barème légal mis à jour sur [Service-Public.fr](https://www.service-public.fr/)."
+  },
+  {
+    id: "obtenir_convention",
+    title: "Obtenir sa convention de stage (PStage)",
+    keywords: ["convention", "pstage", "obtenir", "demande", "simon", "professeur"],
+    patterns: ["comment obtenir ma convention", "faire sa convention", "procedure convention"],
+    answer: "📄 **Obtenir sa convention de stage :**\n\n1. Fais valider ton sujet par ton professeur référent (**M. Anthony Simon**).\n2. Saisis ta demande en ligne sur l'application **PStage** via ton [ENT Lyon 2](https://ent.univ-lyon2.fr/).\n3. Fais signer la convention avant le 1ᵉʳ jour du stage."
+  },
+
+  // ================= CATÉGORIE 5 : DÉBOUCHÉS, CV & ENTRETIENS =================
+  {
+    id: "ou_chercher_stage",
+    title: "Où trouver des offres de stage en tourisme",
+    keywords: ["trouver", "offres", "plateforme", "site", "ou chercher", "job", "jobteaser"],
+    patterns: ["ou trouver des offres de stage en tourisme", "sur quels sites chercher un stage"],
+    answer: "🔍 **Où chercher un stage / une alternance ?**\n\n• **Plateforme Lyon 2 :** [JobTeaser Lyon 2](https://univ-lyon2.jobteaser.com/).\n• **Presse pro :** [TourMaG](https://www.tourmag.com/) & [L'Echo Touristique](https://www.lechotouristique.com/).\n• **Institutions :** Sites des Offices de Tourisme, CDT/CRT et Parcs Naturels Régionaux."
+  },
+  {
+    id: "ameliorer_cv",
+    title: "Améliorer son CV et son profil LinkedIn",
+    keywords: ["cv", "curriculum", "linkedin", "profil", "lettre", "motivation"],
+    patterns: ["comment ameliorer mon cv", "conseils cv tourisme", "optimiser linkedin"],
+    answer: "📄 **Conseils CV & LinkedIn :**\n\n• **CV :** 1 page, met en avant tes compétences en tourisme durable (RSE, webmarketing, diagnostic territorial).\n• **LinkedIn :** Soigne ton titre (ex: *« Étudiant M1 Tourisme Durable | Recherche stage »*).\n• **Accompagnement :** Prends rendez-vous avec le [COSIE Lyon 2](https://www.univ-lyon2.fr/orientation-insertion) pour relire ton CV !"
+  },
+  {
+    id: "infos_master",
+    title: "Présentation du Master & Contact Responsable",
