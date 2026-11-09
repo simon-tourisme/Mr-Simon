@@ -1,149 +1,92 @@
 <!doctype html>
-<html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"><meta name="theme-color" content="#174b3b"><title>Simon – Assistant étudiant Lyon 2</title>
+<html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"><meta name="theme-color" content="#174b3b"><title>Simon – Assistant Mobile Lyon 2</title>
 <style>
-:root{--g:#174b3b;--g2:#28765d;--mint:#edf5ef;--line:#dce8e0;--ink:#20312a;--muted:#63736b;--gold:#c99a62}
+:root{--g:#174b3b;--g2:#28765d;--mint:#edf5ef;--line:#dce8e0;--ink:#1a2822;--muted:#576860;--gold:#c99a62}
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-body{margin:0;background:linear-gradient(140deg,#edf5ef,#e3eee7);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",sans-serif;min-height:100vh;min-height:100dvh}
-button{font:inherit}
+html,body{height:100%;height:100dvh;margin:0;padding:0;overflow:hidden;background:#e2eee7;font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;color:var(--ink)}
 
-/* APP STRUCTURE (DESKTOP) */
-.app{max-width:1180px;margin:auto;padding:16px;display:grid;grid-template-columns:260px 1fr;gap:16px;min-height:100vh;min-height:100dvh}
-aside,.panel{background:white;border:1px solid var(--line);border-radius:20px;box-shadow:0 12px 32px #174b3b12}
-aside{padding:18px;align-self:start;position:sticky;top:16px}
-.brand{font-weight:800;color:var(--g);font-size:1.2rem}.brand span{font-size:1.6rem;vertical-align:middle}
-.sub{font-size:.82rem;color:var(--muted);line-height:1.4;margin:6px 0 14px}
-.smallhead{font-size:.68rem;letter-spacing:.08em;text-transform:uppercase;color:#809087;font-weight:800;margin:14px 0 6px}
+/* SIMULATION APP NATIVE 100% VERTICALE */
+.mobile-app{width:100%;max-width:480px;height:100%;height:100dvh;margin:0 auto;background:#ffffff;display:flex;flex-direction:column;overflow:hidden;box-shadow:0 0 40px rgba(0,0,0,0.12)}
 
-/* THEMATIC NAVIGATION */
-nav{display:grid;gap:5px}
-nav button,.resource{border:0;background:transparent;text-align:left;padding:9px 11px;border-radius:10px;color:var(--ink);font-size:.84rem;text-decoration:none;display:block;cursor:pointer;transition:all 0.15s ease}
-nav button:hover,nav button.active,.resource:hover{background:var(--mint);color:var(--g);font-weight:700}
-.note{background:#fff8ed;border-left:3px solid var(--gold);border-radius:8px;padding:9px 11px;font-size:.76rem;line-height:1.4;color:#715b3d;margin-top:14px}
+/* HEADER COMPACT & LISIBLE */
+header{background:var(--g);color:white;padding:12px 16px 10px;flex-shrink:0;box-shadow:0 2px 10px rgba(0,0,0,0.1)}
+.brand{font-weight:800;font-size:1.15rem;display:flex;align-items:center;gap:6px}.brand span{font-size:1.3rem}
+.sub{font-size:.76rem;opacity:.9;margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 
-/* MAIN PANEL & CHAT */
-main{min-width:0;display:flex;flex-direction:column}
-.top{padding:4px 4px 10px}
-.eyebrow{font-size:.7rem;letter-spacing:.08em;text-transform:uppercase;color:var(--g2);font-weight:800}
-h1{font-size:clamp(1.15rem,2.8vw,1.75rem);color:var(--g);margin:2px 0 4px}
-.top p{margin:0;color:var(--muted);font-size:.85rem}
+/* NAV HORIZONTALE SCROLLABLE (THÉMATIQUES) */
+nav{display:flex;background:#f7faf8;padding:8px 12px;gap:6px;overflow-x:auto;border-bottom:1px solid var(--line);-webkit-overflow-scrolling:touch;scrollbar-width:none;flex-shrink:0}
+nav::-webkit-scrollbar{display:none}
+nav button{white-space:nowrap;padding:7px 13px;border:1px solid var(--line);border-radius:20px;font-size:.8rem;background:white;color:var(--ink);cursor:pointer;flex-shrink:0;transition:all 0.15s ease}
+nav button.active{background:var(--g);color:white;border-color:var(--g);font-weight:700}
 
-.panel{display:flex;flex-direction:column;flex:1;height:calc(100vh - 120px);height:calc(100dvh - 120px);min-height:450px;overflow:hidden}
-.head{padding:10px 14px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;color:var(--muted);font-size:.78rem}
-.online:before{content:"";display:inline-block;width:7px;height:7px;background:#3b9a67;border-radius:50%;margin-right:6px}
-
-/* MESSAGES */
-#messages{padding:14px;display:flex;flex-direction:column;gap:10px;flex:1;overflow-y:auto;scroll-behavior:smooth}
-.msg{max-width:88%;padding:11px 14px;border-radius:14px;line-height:1.5;font-size:.88rem;overflow-wrap:anywhere}
-.bot{align-self:flex-start;background:#f5f9f6;border:1px solid var(--line);border-bottom-left-radius:3px}
-.user{align-self:flex-end;background:var(--g);color:white;border-bottom-right-radius:3px}
-.msg h3{color:var(--g);font-size:.95rem;margin:0 0 6px}
+/* CHAT ZONE (SCROLL DYNAMIQUE) */
+.chat-container{flex:1;display:flex;flex-direction:column;justify-content:space-between;min-height:0;overflow:hidden;background:#fcfdfe}
+#messages{padding:14px;display:flex;flex-direction:column;gap:12px;flex:1;overflow-y:auto;scroll-behavior:smooth}
+.msg{max-width:92%;padding:12px 15px;border-radius:16px;line-height:1.5;font-size:.88rem;overflow-wrap:anywhere}
+.bot{align-self:flex-start;background:#f2f7f4;border:1px solid var(--line);border-bottom-left-radius:4px;color:var(--ink)}
+.user{align-self:flex-end;background:var(--g);color:white;border-bottom-right-radius:4px}
+.msg h3{color:var(--g);font-size:.95rem;margin:0 0 6px;line-height:1.3}
 .msg p{margin:5px 0}
-.msg ul,.msg ol{padding-left:18px;margin:5px 0}
+.msg ul,.msg ol{padding-left:18px;margin:6px 0}
 .msg li{margin:4px 0}
-.msg a{color:var(--g2);font-weight:650;text-underline-offset:2px}
+.msg a{color:var(--g2);font-weight:700;text-underline-offset:2px}
 .user a{color:#ffe0b8}
-.msg .callout{background:#fff8ed;border-left:3px solid var(--gold);padding:8px 10px;border-radius:6px;margin:8px 0}
+.msg .callout{background:#fff8ed;border-left:3px solid var(--gold);padding:8px 11px;border-radius:8px;margin:8px 0;color:#6b5335}
 
-/* SHORTCUTS / BUTTONS AREA */
-.composer{padding:10px 12px;border-top:1px solid var(--line);background:#fafdfb;display:flex;flex-direction:column;gap:6px}
-.shortcuts-title{font-size:.7rem;font-weight:700;color:var(--g2);text-transform:uppercase;letter-spacing:.04em}
-.shortcuts{display:flex;flex-wrap:wrap;gap:6px;max-height:160px;overflow-y:auto;padding-right:2px}
-.shortcuts button{background:white;border:1px solid var(--line);color:var(--g);border-radius:10px;padding:8px 11px;font-size:.8rem;cursor:pointer;transition:all 0.15s ease;text-align:left;box-shadow:0 1px 3px #174b3b08;min-height:38px;display:flex;align-items:center}
-.shortcuts button:hover,.shortcuts button:active{background:var(--mint);border-color:var(--g2);color:var(--g);font-weight:600}
-.hint,.foot{text-align:center;color:var(--muted);font-size:.7rem;margin:4px 0 0;line-height:1.3}
-.clear{border:1px solid var(--line);background:white;border-radius:6px;padding:5px 8px;color:var(--muted);font-size:.74rem;cursor:pointer}
+/* ZONE BOUTONS INTERACTIFS EN BAS (ERGONOMIE POUCE) */
+.composer{padding:10px 12px 14px;border-top:1px solid var(--line);background:#ffffff;display:flex;flex-direction:column;gap:6px;flex-shrink:0}
+.composer-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:2px}
+.shortcuts-title{font-size:.72rem;font-weight:800;color:var(--g2);text-transform:uppercase;letter-spacing:.05em}
+.clear{border:1px solid var(--line);background:#f7faf8;border-radius:6px;padding:4px 9px;color:var(--muted);font-size:.72rem;cursor:pointer}
+.shortcuts{display:flex;flex-direction:column;gap:6px;max-height:165px;overflow-y:auto;padding-right:2px}
+.shortcuts button{background:#ffffff;border:1px solid var(--line);color:var(--g);border-radius:10px;padding:9px 12px;font-size:.82rem;font-weight:600;cursor:pointer;text-align:left;box-shadow:0 1px 3px rgba(0,0,0,0.03);min-height:40px;display:flex;align-items:center;width:100%;line-height:1.25}
+.shortcuts button:active{background:var(--mint);border-color:var(--g2)}
 
-/* 📱 VERTICAL PHONE OPTIMIZATION */
-@media(max-width:768px){
-  .app{grid-template-columns:1fr;padding:8px;gap:8px;height:100vh;height:100dvh}
-  aside{position:static;padding:10px 12px;border-radius:14px}
-  .brand{font-size:1.1rem}.brand span{font-size:1.3rem}
-  .sub,.resource-list,.note,.top p{display:none}
-  .smallhead{margin:0 0 6px;font-size:.62rem}
-  
-  /* Horizontal scroll for categories on phones */
-  nav{display:flex;overflow-x:auto;padding-bottom:2px;gap:5px;-webkit-overflow-scrolling:touch;scrollbar-width:none}
-  nav::-webkit-scrollbar{display:none}
-  nav button{white-space:nowrap;padding:7px 12px;border:1px solid var(--line);border-radius:16px;font-size:.78rem;background:white;flex-shrink:0}
-  
-  /* Full vertical adaptation of panel */
-  main{flex:1;height:100%;min-height:0}
-  .top{padding:2px 4px 4px}
-  h1{font-size:1.1rem;margin:0}
-  .panel{height:100%;min-height:0;border-radius:14px;flex:1}
-  .head{padding:8px 12px}
-  #messages{padding:10px;gap:8px}
-  .msg{max-width:94%;font-size:.85rem;padding:9px 12px}
-  
-  /* Compact touch buttons area for small vertical screens */
-  .composer{padding:8px 10px}
-  .shortcuts{max-height:130px;gap:5px}
-  .shortcuts button{font-size:.78rem;padding:7px 10px;min-height:36px;border-radius:8px}
-  .hint,.foot{display:none} /* Hide footers on phone screens to maximize space */
-}
-
-@media(max-width:380px){
-  .shortcuts{max-height:110px}
-  .shortcuts button{font-size:.75rem;padding:6px 8px}
+@media(min-width:481px){
+  body{padding:12px}
+  .mobile-app{border-radius:24px;height:96vh;height:96dvh;border:1px solid var(--line)}
 }
 </style></head><body>
-<div class="app">
-<aside>
-  <div class="brand"><span>🌿</span> Simon</div>
-  <div class="sub">Assistant étudiant du Master Tourisme – Université Lumière Lyon 2.</div>
-  <div class="smallhead">Thématiques</div>
+
+<div class="mobile-app">
+  <header>
+    <div class="brand"><span>🌿</span> Simon · Master Tourisme</div>
+    <div class="sub">Université Lumière Lyon 2 · UFR Temps et Territoires</div>
+  </header>
+
   <nav id="nav">
-    <button class="active" data-cat="all">✨ Tout afficher</button>
+    <button class="active" data-cat="all">✨ Tout</button>
     <button data-cat="stage">🧭 Stage M1</button>
     <button data-cat="convention">📄 Convention</button>
     <button data-cat="droits">💶 Droits &amp; Gratification</button>
     <button data-cat="rapport">📝 Rapport d'étonnement</button>
     <button data-cat="emploi">💼 Emploi &amp; Entretiens</button>
-    <button data-cat="master">🎓 Master Tourisme</button>
+    <button data-cat="master">🎓 Master</button>
     <button data-cat="vie">🏡 Vie étudiante</button>
   </nav>
-  <div class="resource-list">
-    <div class="smallhead">Ressources officielles</div>
-    <a class="resource" href="https://www.univ-lyon2.fr/formation/contacts-cosie" target="_blank" rel="noopener">COSIE ↗</a>
-    <a class="resource" href="https://tt.univ-lyon2.fr/vie-etudiante/demarches" target="_blank" rel="noopener">Démarches UFR ↗</a>
-    <a class="resource" href="https://www.crous-lyon.fr/" target="_blank" rel="noopener">Crous de Lyon ↗</a>
-    <a class="resource" href="https://www.tcl.fr/" target="_blank" rel="noopener">Transports TCL ↗</a>
-  </div>
-  <div class="note">Assistant interactif par boutons : sélectionne une question pour afficher la réponse.</div>
-</aside>
 
-<main>
-  <div class="top">
-    <div class="eyebrow">Université Lumière Lyon 2 · UFR Temps et Territoires</div>
-    <h1>Master Tourisme</h1>
-    <p>Management durable des destinations et produits touristiques.</p>
-  </div>
-  <section class="panel">
-    <div class="head">
-      <span class="online">Navigation 100% boutons</span>
-      <button class="clear" id="clear">Réinitialiser</button>
-    </div>
+  <div class="chat-container">
     <div id="messages" aria-live="polite">
       <div class="msg bot welcome">
         <h3>Bonjour ! Moi, c’est Simon 👋</h3>
-        Sélectionne une thématique ci-dessus ou clique directement sur une question ci-dessous pour obtenir une réponse claire et officielle.
+        Sélectionne une thématique ci-dessus ou touche directement une question ci-dessous pour afficher la réponse.
       </div>
     </div>
+
     <div class="composer">
-      <div class="shortcuts-title" id="shortcutsTitle">💡 Questions : Toutes les catégories</div>
-      <div class="shortcuts" id="shortcuts">
-        <!-- Boutons générés dynamiquement -->
+      <div class="composer-header">
+        <div class="shortcuts-title" id="shortcutsTitle">💡 Questions disponibles</div>
+        <button class="clear" id="clear">Réinitialiser</button>
       </div>
-      <div class="hint">Clique sur n'importe quelle question pour obtenir la réponse.</div>
+      <div class="shortcuts" id="shortcuts">
+        <!-- Généré dynamiquement par JS -->
+      </div>
     </div>
-  </section>
-  <div class="foot">FAQ étudiante non officielle. Vérifie Moodle et les consignes de la scolarité.</div>
-</main>
+  </div>
 </div>
 
 <script>
 "use strict";
-// BASE DE DONNÉES ENRICHIE ET STRUCTURÉE
 const F=[
 // --- CATEGORIE : STAGE M1 ---
 ["stage","Le stage est-il obligatoire pour valider mon M1 ?","La réalisation d’un stage est <b>obligatoire en M1</b>.<br><br>Il te permet de valider les crédits ECTS associés à cette expérience professionnelle, tout en mettant en pratique les connaissances théoriques et méthodologiques acquises durant ta formation.<div class='callout'>📌 <b>Rappel :</b> Vérifie les modalités précises sur Moodle ou auprès de ton responsable de formation (M. Anthony Simon).</div>"],
@@ -196,7 +139,7 @@ const shortcutsTitle = document.getElementById("shortcutsTitle");
 let currentCategory = "all";
 
 const catNames = {
-  all: "Toutes les catégories",
+  all: "Toutes les thématiques",
   stage: "🧭 Stage M1",
   convention: "📄 Convention de stage",
   droits: "💶 Droits & Gratification",
@@ -208,7 +151,7 @@ const catNames = {
 
 function updateShortcuts() {
   shortcutsContainer.innerHTML = "";
-  shortcutsTitle.textContent = `💡 Questions : ${catNames[currentCategory] || 'Sélection'}`;
+  shortcutsTitle.textContent = `💡 ${catNames[currentCategory] || 'Questions'}`;
 
   const filtered = currentCategory === "all" ? F : F.filter(item => item[0] === currentCategory);
 
@@ -245,14 +188,14 @@ document.getElementById("nav").addEventListener("click", e => {
   updateShortcuts();
 
   const msgText = currentCategory === "all" 
-    ? "Toutes les catégories sont affichées. Cliquez sur une question ci-dessous !" 
-    : `Catégorie <b>${catNames[currentCategory]}</b> sélectionnée. Cliquez sur la question de votre choix :`;
+    ? "Toutes les catégories sont affichées. Touche une question ci-dessous !" 
+    : `Catégorie <b>${catNames[currentCategory]}</b> sélectionnée. Touche une question :`;
     
   addMessage(msgText, "bot");
 });
 
 document.getElementById("clear").addEventListener("click", () => {
-  msgs.innerHTML = `<div class="msg bot welcome"><h3>Nouvelle conversation 👋</h3>Sélectionne une thématique ci-dessus ou clique directement sur une question ci-dessous.</div>`;
+  msgs.innerHTML = `<div class="msg bot welcome"><h3>Nouvelle conversation 👋</h3>Sélectionne une thématique ci-dessus ou touche directement une question ci-dessous.</div>`;
 });
 
 // Initialisation au chargement
