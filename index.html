@@ -17,7 +17,7 @@ main{min-width:0}.top{padding:7px 5px 14px}.eyebrow{font-size:.72rem;letter-spac
 .suggestions{display:flex;flex-wrap:wrap;gap:7px;margin:8px 0}.composer{padding:13px 16px;border-top:1px solid var(--line);background:#fafdfb}
 .quick-box{margin-bottom:10px;display:flex;flex-direction:column;gap:8px}
 .select-q{width:100%;padding:8px 11px;border:1px solid var(--line);border-radius:10px;background:white;color:var(--g);font-weight:600;font-size:.82rem;outline:none;cursor:pointer}
-.shortcuts{display:flex;flex-wrap:wrap;gap:6px;max-height:85px;overflow-y:auto;padding-right:2px}.shortcuts button{background:white;border:1px solid var(--line);color:var(--g2);border-radius:30px;padding:6px 11px;font-size:.76rem;cursor:pointer}.shortcuts button:hover{background:var(--mint);color:var(--g);font-weight:600}
+.shortcuts{display:flex;flex-wrap:wrap;gap:6px;max-height:95px;overflow-y:auto;padding-right:2px}.shortcuts button{background:white;border:1px solid var(--line);color:var(--g2);border-radius:30px;padding:6px 11px;font-size:.76rem;cursor:pointer;transition:all 0.15s ease}.shortcuts button:hover{background:var(--mint);color:var(--g);font-weight:600}
 form{display:flex;gap:8px}input{flex:1;min-width:0;border:1px solid var(--line);border-radius:11px;padding:12px;outline:none;background:#ffffff}input:focus{border-color:var(--g2);box-shadow:0 0 0 3px #28765d18}.send{border:0;border-radius:11px;padding:0 17px;background:var(--g);color:white;font-weight:700;cursor:pointer}.send:hover{background:var(--g2)}.hint,.foot{text-align:center;color:var(--muted);font-size:.73rem;margin:8px 0 0;line-height:1.5}.clear{border:1px solid var(--line);background:white;border-radius:8px;padding:6px 9px;color:var(--muted);font-size:.76rem;cursor:pointer}
 @media(max-width:820px){.app{grid-template-columns:1fr;padding:10px;gap:10px}aside{position:static;padding:13px}.sub,.resource-list,.note{display:none}nav{display:flex;overflow:auto}nav button{white-space:nowrap}.panel{min-height:72vh}#messages{max-height:none}}
 @media(max-width:540px){.app{padding:0}.panel,aside{border-radius:0;border-left:0;border-right:0}.panel{min-height:calc(100vh - 112px)}#messages{padding:13px}.msg{max-width:97%;font-size:.87rem;padding:11px 13px}.tiles{grid-template-columns:1fr}.composer{padding:10px}.send{padding:0 12px}.top{padding:10px 13px}}
@@ -33,24 +33,56 @@ form{display:flex;gap:8px}input{flex:1;min-width:0;border:1px solid var(--line);
 <div class="composer">
   <div class="quick-box">
     <select class="select-q" id="questionSelect">
-      <option value="">💡 Sélectionne une question dans la liste...</option>
-      <!-- Le contenu du menu déroulant se met à jour dynamiquement -->
+      <option value="">💡 Menu déroulant : sélectionne une question directe...</option>
+      <optgroup label="🧭 Modalités du Stage M1">
+        <option value="Le stage est-il obligatoire en M1 ?">Le stage est-il obligatoire en M1 ?</option>
+        <option value="Quelle est la durée minimale du stage ?">Quelle est la durée minimale du stage ?</option>
+        <option value="Quelle est la durée maximale du stage ?">Quelle est la durée maximale du stage ?</option>
+        <option value="Quand commencer mon stage ?">Quand commencer mon stage ?</option>
+        <option value="Quand commencer à chercher un stage ?">Quand commencer à chercher un stage ?</option>
+        <option value="Puis-je faire mon stage à l’étranger ?">Puis-je faire mon stage à l’étranger ?</option>
+        <option value="Qui peut m’aider pour mon CV et ma recherche de stage ?">Qui peut m’aider pour mon CV et ma recherche ?</option>
+      </optgroup>
+      <optgroup label="📄 Convention de Stage">
+        <option value="Comment faire ma convention de stage ?">Comment faire ma convention de stage ?</option>
+        <option value="Qui complète et signe la convention ?">Qui complète et signe la convention ?</option>
+        <option value="Combien de temps prend la convention ?">Combien de temps prend la convention ?</option>
+      </optgroup>
+      <optgroup label="💶 Gratification & Droits">
+        <option value="Quand la gratification est-elle obligatoire ?">Quand la gratification est-elle obligatoire ?</option>
+        <option value="Quel est le montant minimum de gratification en 2026 ?">Quel est le montant minimum de gratification ?</option>
+        <option value="Ai-je droit à des congés pendant mon stage ?">Ai-je droit à des congés pendant mon stage ?</option>
+        <option value="Puis-je travailler le week-end ou les jours fériés ?">Puis-je travailler le week-end / jours fériés ?</option>
+        <option value="Que faire en cas de problème pendant mon stage ?">Que faire en cas de problème pendant mon stage ?</option>
+      </optgroup>
+      <optgroup label="📝 Rapport d'Étonnement">
+        <option value="Qu’est-ce que le rapport d’étonnement ?">Qu’est-ce que le rapport d’étonnement ?</option>
+        <option value="Quand rendre le rapport d’étonnement ?">Quand rendre le rapport d’étonnement ?</option>
+        <option value="À qui envoyer le rapport ?">À qui envoyer le rapport ?</option>
+        <option value="Y a-t-il une soutenance orale ?">Y a-t-il une soutenance orale ?</option>
+      </optgroup>
+      <optgroup label="💼 Emploi & Entretiens">
+        <option value="Quelles sont les 10 astuces pour réussir un entretien professionnel ?">10 astuces pour réussir un entretien</option>
+        <option value="Comment utiliser la méthode STAR en entretien ?">Comment utiliser la méthode STAR ?</option>
+        <option value="Quelle différence entre stage et alternance ?">Quelle différence entre stage et alternance ?</option>
+        <option value="Où chercher des offres de stage en tourisme ?">Où chercher des offres de stage en tourisme ?</option>
+        <option value="Comment améliorer mon CV et ma lettre de motivation ?">Comment améliorer mon CV et ma lettre ?</option>
+      </optgroup>
+      <optgroup label="🏡 Vie Étudiante & Master">
+        <option value="Comment bénéficier du repas Crous à 1 euro ?">Repas Crous à 1 euro ?</option>
+        <option value="Comment demander une bourse ou un logement Crous ?">Demander bourse ou logement Crous ?</option>
+        <option value="Comment faire une demande d’aide au logement ?">Demande d'aide au logement (CAF) ?</option>
+        <option value="Comment se déplacer à Lyon à tarif étudiant ?">Transports TCL à tarif étudiant ?</option>
+      </optgroup>
     </select>
     
     <div class="shortcuts" id="shortcuts">
-      <button data-q="Le stage est-il obligatoire en M1 ?">Stage M1 obligatoire ?</button>
-      <button data-q="Comment faire ma convention de stage ?">Procédure Convention Pstage</button>
-      <button data-q="Quel est le montant minimum de gratification en 2026 ?">Gratification minimale (4,50€)</button>
-      <button data-q="Qu’est-ce que le rapport d’étonnement ?">Rapport d'étonnement (10 pages)</button>
-      <button data-q="Quelles sont les 10 astuces pour réussir un entretien professionnel ?">10 Astuces Entretien</button>
-      <button data-q="Comment utiliser la méthode STAR en entretien ?">Méthode S.T.A.R.</button>
-      <button data-q="Qui peut m’aider pour mon CV et ma recherche de stage ?">Aide CV & COSIE</button>
-      <button data-q="Où chercher des offres de stage en tourisme ?">Sites d'offres stage</button>
+      <!-- Boutons de questions rapides générés dynamiquement selon la thématique -->
     </div>
   </div>
 
   <form id="form"><input id="q" placeholder="Écris ta question ici…" aria-label="Ta question" autocomplete="off"><button class="send">Envoyer</button></form>
-  <div class="hint">Astuce : choisis un bouton rapide, filtre par thématique à gauche ou tape ta question.</div>
+  <div class="hint">Astuce : choisis un bouton rapide, utilise le menu déroulant ou tape ta question.</div>
 </div>
 </section>
 <div class="foot">FAQ étudiante non officielle. Les dates et consignes pédagogiques peuvent évoluer : vérifie Moodle et les informations de la scolarité.</div></main></div>
@@ -95,43 +127,26 @@ const F=[
 ["master","Où trouver les contacts de la scolarité ?","contact scolarite secretariat mail telephone ufr","Le responsable du Master est <b>M. Anthony Simon</b> (anthony.simon@univ-lyon2.fr). Pour toute autre question administrative, rapproche-toi de la scolarité de l’UFR Temps et Territoires. <a href='https://tt.univ-lyon2.fr/' target='_blank' rel='noopener'>UFR Temps et Territoires ↗</a>"]
 ];
 
-const CAT_LABELS = {
-  master: "🎓 Master Tourisme",
-  stage: "🧭 Stage M1",
-  convention: "📄 Convention de Stage",
-  droits: "💶 Gratification & Droits",
-  rapport: "📝 Rapport d'Étonnement",
-  emploi: "💼 Emploi & Entretiens",
-  vie: "🏡 Vie Étudiante & Lyon"
-};
-
-const msgs=document.getElementById("messages"),input=document.getElementById("q"),selectEl=document.getElementById("questionSelect");
+const msgs=document.getElementById("messages"),input=document.getElementById("q"),shortcutsContainer=document.getElementById("shortcuts");
 let category="all";
 const stop=new Set("le la les un une des du de d l a au aux en pour par sur dans avec et ou est son sa ses mon ma mes ton ta tes je tu il elle nous vous qui que quoi quand comment pourquoi faire avoir".split(" "));
-
-function updateDropdown(cat) {
-  selectEl.innerHTML = '<option value="">💡 Sélectionne une question dans la liste...</option>';
-  const categoriesToDisplay = (cat === "all") ? Object.keys(CAT_LABELS) : [cat];
-
-  categoriesToDisplay.forEach(c => {
-    const questionsInCat = F.filter(item => item[0] === c);
-    if (questionsInCat.length > 0) {
-      const optgroup = document.createElement("optgroup");
-      optgroup.label = CAT_LABELS[c] || c;
-      questionsInCat.forEach(q => {
-        const option = document.createElement("option");
-        option.value = q[1];
-        option.textContent = q[1];
-        optgroup.appendChild(option);
-      });
-      selectEl.appendChild(optgroup);
-    }
-  });
-}
 
 function norm(s){return String(s).toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"").replace(/[^a-z0-9]+/g," ").trim()}
 function words(s){return norm(s).split(/\s+/).filter(x=>x.length>1&&!stop.has(x))}
 function esc(s){return String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
+
+// MISE À JOUR DYNAMIQUE DES BOUTONS RAPIDES SELON LA THÉMATIQUE
+function updateShortcuts(){
+  shortcutsContainer.innerHTML="";
+  const filtered = category === "all" ? F : F.filter(item => item[0] === category);
+  filtered.slice(0, 8).forEach(item => {
+    const btn = document.createElement("button");
+    btn.setAttribute("data-q", item[1]);
+    btn.textContent = item[1];
+    shortcutsContainer.appendChild(btn);
+  });
+}
+
 function add(text,who){const d=document.createElement("div");d.className="msg "+who;if(who==="user")d.textContent=text;else d.innerHTML=text;msgs.appendChild(d);msgs.scrollTop=msgs.scrollHeight;return d}
 
 function search(query){
@@ -153,13 +168,13 @@ document.getElementById("nav").addEventListener("click",e=>{
   if(!b)return;
   category=b.dataset.cat;
   document.querySelectorAll("nav button").forEach(x=>x.classList.toggle("active",x===b));
-  updateDropdown(category);
-  add(category==="all"?"Toutes les thématiques sont sélectionnées. Pose-moi une question !":"Thématique filtrée : <b>"+b.textContent.trim()+"</b>. Le menu déroulant s'est adapté à ton choix !","bot");
+  updateShortcuts(); // Met à jour les boutons rapides selon le choix de gauche
+  add(category==="all"?"Toutes les thématiques sont sélectionnées. Pose-moi une question !":"Thématique sélectionnée : "+b.textContent.trim()+". Pose-moi une question sur ce sujet.","bot");
 });
 
 document.getElementById("clear").addEventListener("click",()=>{msgs.innerHTML="<div class='msg bot'><h3>Nouvelle conversation 👋</h3>Bonjour ! Pose-moi une question sur le Master, les stages, les démarches ou la vie étudiante.</div>";input.focus()});
-selectEl.addEventListener("change",e=>{if(e.target.value){ask(e.target.value);e.target.value=""}});
+document.getElementById("questionSelect").addEventListener("change",e=>{if(e.target.value){ask(e.target.value);e.target.value=""}});
 
-// Initialisation du menu déroulant au chargement
-updateDropdown("all");
+// Initialisation au chargement
+updateShortcuts();
 </script></body></html>
