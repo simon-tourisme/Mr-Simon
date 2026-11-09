@@ -3,178 +3,186 @@
 <style>
 :root{--g:#174b3b;--g2:#28765d;--mint:#edf5ef;--line:#dce8e0;--ink:#20312a;--muted:#63736b;--gold:#c99a62}
 *{box-sizing:border-box}body{margin:0;background:linear-gradient(140deg,#edf5ef,#e3eee7);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",sans-serif;min-height:100vh}
-button,input,select{font:inherit}.app{max-width:1180px;margin:auto;padding:20px;display:grid;grid-template-columns:250px 1fr;gap:18px}
+button{font:inherit}.app{max-width:1180px;margin:auto;padding:20px;display:grid;grid-template-columns:250px 1fr;gap:18px}
 aside,.panel{background:white;border:1px solid var(--line);border-radius:22px;box-shadow:0 16px 42px #174b3b12}
 aside{padding:20px;align-self:start;position:sticky;top:16px}.brand{font-weight:800;color:var(--g);font-size:1.25rem}.brand span{font-size:1.8rem;vertical-align:middle}.sub{font-size:.84rem;color:var(--muted);line-height:1.5;margin:8px 0 18px}
 .smallhead{font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:#809087;font-weight:800;margin:18px 0 7px}
-nav{display:grid;gap:5px}nav button,.resource{border:0;background:transparent;text-align:left;padding:9px 10px;border-radius:9px;color:var(--ink);font-size:.85rem;text-decoration:none;display:block}nav button:hover,nav button.active,.resource:hover{background:var(--mint);color:var(--g);font-weight:700}
+nav{display:grid;gap:5px}nav button,.resource{border:0;background:transparent;text-align:left;padding:9px 10px;border-radius:9px;color:var(--ink);font-size:.85rem;text-decoration:none;display:block;cursor:pointer}nav button:hover,nav button.active,.resource:hover{background:var(--mint);color:var(--g);font-weight:700}
 .note{background:#fff8ed;border-left:3px solid var(--gold);border-radius:8px;padding:10px 12px;font-size:.78rem;line-height:1.5;color:#715b3d;margin-top:16px}
 main{min-width:0}.top{padding:7px 5px 14px}.eyebrow{font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--g2);font-weight:800}h1{font-size:clamp(1.4rem,3vw,2rem);color:var(--g);margin:4px 0}.top p{margin:0;color:var(--muted);font-size:.9rem}
 .panel{display:flex;flex-direction:column;min-height:680px;overflow:hidden}.head{padding:13px 18px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;color:var(--muted);font-size:.8rem}.online:before{content:"";display:inline-block;width:8px;height:8px;background:#3b9a67;border-radius:50%;margin-right:8px}
-#messages{padding:20px;display:flex;flex-direction:column;gap:12px;flex:1;min-height:380px;max-height:calc(100vh - 380px);overflow:auto;scroll-behavior:smooth}
-.msg{max-width:92%;padding:13px 16px;border-radius:16px;line-height:1.6;font-size:.91rem;overflow-wrap:anywhere}.bot{align-self:flex-start;background:#f5f9f6;border:1px solid var(--line);border-bottom-left-radius:4px}.user{align-self:flex-end;background:var(--g);color:white;border-bottom-right-radius:4px;white-space:pre-wrap}.msg h3{color:var(--g);font-size:.98rem;margin:0 0 7px}.msg p{margin:7px 0}.msg ul,.msg ol{padding-left:22px;margin:7px 0}.msg li{margin:4px 0}.msg a{color:var(--g2);font-weight:650;text-underline-offset:3px}.user a{color:#ffe0b8}.msg .callout{background:#fff8ed;border-left:3px solid var(--gold);padding:9px 11px;border-radius:7px;margin:10px 0}
-.welcome{max-width:760px}.tiles{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-top:12px}.tiles button,.suggestions button{background:white;border:1px solid var(--line);color:var(--g);border-radius:10px;padding:9px;text-align:left;font-size:.82rem}.tiles button:hover,.suggestions button:hover{background:var(--mint)}
-.suggestions{display:flex;flex-wrap:wrap;gap:7px;margin:8px 0}.composer{padding:13px 16px;border-top:1px solid var(--line);background:#fafdfb}
-.quick-box{margin-bottom:10px;display:flex;flex-direction:column;gap:8px}
-.select-q{width:100%;padding:8px 11px;border:1px solid var(--line);border-radius:10px;background:white;color:var(--g);font-weight:600;font-size:.82rem;outline:none;cursor:pointer}
-.shortcuts{display:flex;flex-wrap:wrap;gap:6px;max-height:95px;overflow-y:auto;padding-right:2px}.shortcuts button{background:white;border:1px solid var(--line);color:var(--g2);border-radius:30px;padding:6px 11px;font-size:.76rem;cursor:pointer;transition:all 0.15s ease}.shortcuts button:hover{background:var(--mint);color:var(--g);font-weight:600}
-form{display:flex;gap:8px}input{flex:1;min-width:0;border:1px solid var(--line);border-radius:11px;padding:12px;outline:none;background:#ffffff}input:focus{border-color:var(--g2);box-shadow:0 0 0 3px #28765d18}.send{border:0;border-radius:11px;padding:0 17px;background:var(--g);color:white;font-weight:700;cursor:pointer}.send:hover{background:var(--g2)}.hint,.foot{text-align:center;color:var(--muted);font-size:.73rem;margin:8px 0 0;line-height:1.5}.clear{border:1px solid var(--line);background:white;border-radius:8px;padding:6px 9px;color:var(--muted);font-size:.76rem;cursor:pointer}
+#messages{padding:20px;display:flex;flex-direction:column;gap:12px;flex:1;min-height:340px;max-height:calc(100vh - 420px);overflow:auto;scroll-behavior:smooth}
+.msg{max-width:92%;padding:13px 16px;border-radius:16px;line-height:1.6;font-size:.91rem;overflow-wrap:anywhere}.bot{align-self:flex-start;background:#f5f9f6;border:1px solid var(--line);border-bottom-left-radius:4px}.user{align-self:flex-end;background:var(--g);color:white;border-bottom-right-radius:4px;white-space:pre-wrap}.msg h3{color:var(--g);font-size:1rem;margin:0 0 8px}.msg p{margin:7px 0}.msg ul,.msg ol{padding-left:22px;margin:7px 0}.msg li{margin:5px 0}.msg a{color:var(--g2);font-weight:650;text-underline-offset:3px}.user a{color:#ffe0b8}.msg .callout{background:#fff8ed;border-left:3px solid var(--gold);padding:9px 11px;border-radius:7px;margin:10px 0}
+.composer{padding:16px;border-top:1px solid var(--line);background:#fafdfb}
+.shortcuts-title{font-size:.75rem;font-weight:700;color:var(--g2);text-transform:uppercase;letter-spacing:.05em;margin-bottom:10px}
+.shortcuts{display:flex;flex-wrap:wrap;gap:8px;max-height:160px;overflow-y:auto;padding-right:4px}.shortcuts button{background:white;border:1px solid var(--line);color:var(--g);border-radius:12px;padding:8px 12px;font-size:.82rem;cursor:pointer;transition:all 0.15s ease;text-align:left;box-shadow:0 2px 4px #174b3b08}.shortcuts button:hover{background:var(--mint);border-color:var(--g2);color:var(--g);font-weight:600}
+.hint,.foot{text-align:center;color:var(--muted);font-size:.73rem;margin:8px 0 0;line-height:1.5}.clear{border:1px solid var(--line);background:white;border-radius:8px;padding:6px 9px;color:var(--muted);font-size:.76rem;cursor:pointer}
 @media(max-width:820px){.app{grid-template-columns:1fr;padding:10px;gap:10px}aside{position:static;padding:13px}.sub,.resource-list,.note{display:none}nav{display:flex;overflow:auto}nav button{white-space:nowrap}.panel{min-height:72vh}#messages{max-height:none}}
-@media(max-width:540px){.app{padding:0}.panel,aside{border-radius:0;border-left:0;border-right:0}.panel{min-height:calc(100vh - 112px)}#messages{padding:13px}.msg{max-width:97%;font-size:.87rem;padding:11px 13px}.tiles{grid-template-columns:1fr}.composer{padding:10px}.send{padding:0 12px}.top{padding:10px 13px}}
+@media(max-width:540px){.app{padding:0}.panel,aside{border-radius:0;border-left:0;border-right:0}.panel{min-height:calc(100vh - 112px)}#messages{padding:13px}.msg{max-width:97%;font-size:.87rem;padding:11px 13px}.composer{padding:12px}.top{padding:10px 13px}}
 </style></head><body>
 <div class="app"><aside><div class="brand"><span>🌿</span> Simon</div><div class="sub">Assistant étudiant du Master Tourisme – Université Lumière Lyon 2. Des réponses pratiques et des liens utiles.</div>
-<div class="smallhead">Thématiques</div><nav id="nav"><button class="active" data-cat="all">✨ Tout</button><button data-cat="master">🎓 Master</button><button data-cat="stage">🧭 Stage M1</button><button data-cat="convention">📄 Convention</button><button data-cat="droits">💶 Droits</button><button data-cat="rapport">📝 Rapport</button><button data-cat="emploi">💼 Emploi &amp; Entretiens</button><button data-cat="vie">🏡 Vie étudiante</button></nav>
+<div class="smallhead">Thématiques</div><nav id="nav"><button class="active" data-cat="all">✨ Tout afficher</button><button data-cat="stage">🧭 Stage M1</button><button data-cat="convention">📄 Convention</button><button data-cat="droits">💶 Droits &amp; Gratification</button><button data-cat="rapport">📝 Rapport d'étonnement</button><button data-cat="emploi">💼 Emploi &amp; Entretiens</button><button data-cat="master">🎓 Master Tourisme</button><button data-cat="vie">🏡 Vie étudiante</button></nav>
 <div class="resource-list"><div class="smallhead">Ressources officielles</div><a class="resource" href="https://www.univ-lyon2.fr/formation/contacts-cosie" target="_blank" rel="noopener">COSIE ↗</a><a class="resource" href="https://tt.univ-lyon2.fr/vie-etudiante/demarches" target="_blank" rel="noopener">Démarches UFR ↗</a><a class="resource" href="https://www.crous-lyon.fr/" target="_blank" rel="noopener">Crous de Lyon ↗</a><a class="resource" href="https://www.tcl.fr/" target="_blank" rel="noopener">Transports TCL ↗</a></div>
-<div class="note">Simon utilise une FAQ préparée à l’avance : il ne consulte pas Internet en direct et ne remplace pas la scolarité.</div></aside>
+<div class="note">Simon est un assistant interactif par boutons : sélectionne une question ci-dessous pour afficher immédiatement la réponse.</div></aside>
 <main><div class="top"><div class="eyebrow">Université Lumière Lyon 2 · UFR Temps et Territoires</div><h1>Ton assistant pour le Master Tourisme</h1><p>Management durable des destinations et produits touristiques · Stages, études et vie étudiante.</p></div>
-<section class="panel"><div class="head"><span class="online">FAQ disponible · réponses instantanées</span><button class="clear" id="clear">Nouvelle conversation</button></div>
-<div id="messages" aria-live="polite"><div class="msg bot welcome"><h3>Bonjour ! Moi, c’est Simon 👋</h3>Je peux t’aider sur le Master, les stages de M1, les conventions, la gratification, le rapport d’étonnement, les entretiens et la vie étudiante.
-<div class="tiles"><button data-q="Comment faire ma convention de stage ?">📄 Faire ma convention</button><button data-q="Quelle est la gratification minimale en 2026 ?">💶 Gratification 2026</button><button data-q="Quelles sont les 10 astuces pour réussir un entretien professionnel ?">🎯 Astuces entretien</button><button data-q="Quelles aides et ressources existent pour les étudiants à Lyon ?">🏡 Vie étudiante à Lyon</button></div></div></div>
+<section class="panel"><div class="head"><span class="online">Navigation 100% boutons · Sélectionne ta question</span><button class="clear" id="clear">Réinitialiser la conversation</button></div>
+<div id="messages" aria-live="polite"><div class="msg bot welcome"><h3>Bonjour ! Moi, c’est Simon 👋</h3>Sélectionne une thématique à gauche ou clique directement sur l'une des questions ci-dessous pour obtenir une réponse complète.</div></div>
 <div class="composer">
-  <div class="quick-box">
-    <select class="select-q" id="questionSelect">
-      <option value="">💡 Menu déroulant : sélectionne une question directe...</option>
-      <optgroup label="🧭 Modalités du Stage M1">
-        <option value="Le stage est-il obligatoire en M1 ?">Le stage est-il obligatoire en M1 ?</option>
-        <option value="Quelle est la durée minimale du stage ?">Quelle est la durée minimale du stage ?</option>
-        <option value="Quelle est la durée maximale du stage ?">Quelle est la durée maximale du stage ?</option>
-        <option value="Quand commencer mon stage ?">Quand commencer mon stage ?</option>
-        <option value="Quand commencer à chercher un stage ?">Quand commencer à chercher un stage ?</option>
-        <option value="Puis-je faire mon stage à l’étranger ?">Puis-je faire mon stage à l’étranger ?</option>
-        <option value="Qui peut m’aider pour mon CV et ma recherche de stage ?">Qui peut m’aider pour mon CV et ma recherche ?</option>
-      </optgroup>
-      <optgroup label="📄 Convention de Stage">
-        <option value="Comment faire ma convention de stage ?">Comment faire ma convention de stage ?</option>
-        <option value="Qui complète et signe la convention ?">Qui complète et signe la convention ?</option>
-        <option value="Combien de temps prend la convention ?">Combien de temps prend la convention ?</option>
-      </optgroup>
-      <optgroup label="💶 Gratification & Droits">
-        <option value="Quand la gratification est-elle obligatoire ?">Quand la gratification est-elle obligatoire ?</option>
-        <option value="Quel est le montant minimum de gratification en 2026 ?">Quel est le montant minimum de gratification ?</option>
-        <option value="Ai-je droit à des congés pendant mon stage ?">Ai-je droit à des congés pendant mon stage ?</option>
-        <option value="Puis-je travailler le week-end ou les jours fériés ?">Puis-je travailler le week-end / jours fériés ?</option>
-        <option value="Que faire en cas de problème pendant mon stage ?">Que faire en cas de problème pendant mon stage ?</option>
-      </optgroup>
-      <optgroup label="📝 Rapport d'Étonnement">
-        <option value="Qu’est-ce que le rapport d’étonnement ?">Qu’est-ce que le rapport d’étonnement ?</option>
-        <option value="Quand rendre le rapport d’étonnement ?">Quand rendre le rapport d’étonnement ?</option>
-        <option value="À qui envoyer le rapport ?">À qui envoyer le rapport ?</option>
-        <option value="Y a-t-il une soutenance orale ?">Y a-t-il une soutenance orale ?</option>
-      </optgroup>
-      <optgroup label="💼 Emploi & Entretiens">
-        <option value="Quelles sont les 10 astuces pour réussir un entretien professionnel ?">10 astuces pour réussir un entretien</option>
-        <option value="Comment utiliser la méthode STAR en entretien ?">Comment utiliser la méthode STAR ?</option>
-        <option value="Quelle différence entre stage et alternance ?">Quelle différence entre stage et alternance ?</option>
-        <option value="Où chercher des offres de stage en tourisme ?">Où chercher des offres de stage en tourisme ?</option>
-        <option value="Comment améliorer mon CV et ma lettre de motivation ?">Comment améliorer mon CV et ma lettre ?</option>
-      </optgroup>
-      <optgroup label="🏡 Vie Étudiante & Master">
-        <option value="Comment bénéficier du repas Crous à 1 euro ?">Repas Crous à 1 euro ?</option>
-        <option value="Comment demander une bourse ou un logement Crous ?">Demander bourse ou logement Crous ?</option>
-        <option value="Comment faire une demande d’aide au logement ?">Demande d'aide au logement (CAF) ?</option>
-        <option value="Comment se déplacer à Lyon à tarif étudiant ?">Transports TCL à tarif étudiant ?</option>
-      </optgroup>
-    </select>
-    
-    <div class="shortcuts" id="shortcuts">
-      <!-- Boutons de questions rapides générés dynamiquement selon la thématique -->
-    </div>
+  <div class="shortcuts-title" id="shortcutsTitle">💡 Questions fréquemment posées :</div>
+  <div class="shortcuts" id="shortcuts">
+    <!-- Les boutons sont générés dynamiquement par JavaScript -->
   </div>
-
-  <form id="form"><input id="q" placeholder="Écris ta question ici…" aria-label="Ta question" autocomplete="off"><button class="send">Envoyer</button></form>
-  <div class="hint">Astuce : choisis un bouton rapide, utilise le menu déroulant ou tape ta question.</div>
+  <div class="hint">Clique sur n'importe quelle question pour obtenir la réponse officielle et nos conseils pratiques.</div>
 </div>
 </section>
 <div class="foot">FAQ étudiante non officielle. Les dates et consignes pédagogiques peuvent évoluer : vérifie Moodle et les informations de la scolarité.</div></main></div>
+
 <script>
 "use strict";
+// BASE DE DONNÉES ENRICHIE ET STRUCTURÉE
 const F=[
-["master","Que propose le Master Tourisme ?","master formation tourisme parcours contenu programme durable destination produit","Le Master Tourisme de Lyon 2 forme des professionnels capables d’analyser, concevoir et accompagner le développement des destinations et produits touristiques. Les enseignements mobilisent notamment le marketing territorial, la valorisation des patrimoines, la gestion de projets, l’analyse des territoires et le tourisme responsable. <p><a href='https://tt.univ-lyon2.fr/presentation/tourisme' target='_blank' rel='noopener'>Présentation du département Tourisme ↗</a> · <a href='https://tt.univ-lyon2.fr/formation/masters' target='_blank' rel='noopener'>Catalogue des Masters ↗</a></p>"],
-["master","Quelles compétences développe le Master ?","competence savoir marketing territoire diagnostic rse gestion projet durable","Les compétences travaillées peuvent inclure :<ul><li>Réaliser un diagnostic territorial ou organisationnel intégrant la durabilité.</li><li>Analyser des données et conduire une veille.</li><li>Construire des stratégies de développement, marketing et communication.</li><li>Concevoir des produits et services touristiques.</li><li>Coordonner des acteurs et piloter des projets.</li><li>Évaluer les impacts économiques, sociaux et environnementaux.</li></ul>Consulte la maquette de ta promotion pour le détail officiel."],
-["master","Quels métiers après le Master ?","metier emploi debouche carriere poste apres consultant directeur","Exemples de débouchés : chargé·e de développement touristique, chargé·e de mission tourisme durable, chef·fe de projet, chargé·e de promotion ou marketing territorial, chargé·e d’études et d’observation, chef·fe de produit, consultant·e en tourisme. Les employeurs possibles incluent les offices de tourisme, collectivités, agences, hébergements, associations, entreprises et bureaux d’études."],
-["master","Comment candidater en M1 ou en M2 ?","candidature candidater monmaster mon master ecandidat admission inscription m1 m2","<ul><li><b>Entrée en M1 :</b> plateforme nationale <a href='https://monmaster.gouv.fr/' target='_blank' rel='noopener'>Mon Master ↗</a>.</li><li><b>Entrée en M2 :</b> plateforme <a href='https://ecandidat.univ-lyon2.fr/' target='_blank' rel='noopener'>eCandidat Lyon 2 ↗</a>.</li></ul>Les calendriers et pièces demandées changent chaque année. <a href='https://tt.univ-lyon2.fr/admissions' target='_blank' rel='noopener'>Consulte les admissions de l’UFR ↗</a>."],
-["stage","Le stage est-il obligatoire en M1 ?","stage obligatoire valider m1 ects credit","La réalisation d’un stage est obligatoire en M1. Il te permet de valider les crédits ECTS associés à cette expérience professionnelle, tout en mettant en pratique les connaissances et compétences acquises durant ta formation. <div class='callout'>Cette modalité est propre à la maquette de ta promotion : vérifie les consignes sur Moodle ou auprès de l’équipe pédagogique.</div>"],
-["stage","Quelle est la durée minimale du stage ?","duree minimum minimale mois court gratification","Il n’y a pas officiellement de durée minimale. Cependant, il est conseillé de faire un stage de plus de deux mois afin de bénéficier d’une gratification et d’acquérir davantage d’expérience professionnelle. <a href='https://www.service-public.fr/particuliers/vosdroits/F16734' target='_blank' rel='noopener'>Règles officielles du stage ↗</a>."],
-["stage","Quelle est la durée maximale du stage ?","duree maximum maximale limite mois quatre six","En France, la durée d'un stage dans un même organisme d'accueil est limitée à 6 mois par année d'enseignement. Dans le cadre du M1, maximum 4 mois pour ne pas amputer sur les cours qui reprennent mi-septembre. <div class='callout'>La limite de quatre mois est une indication pédagogique à confirmer ; la limite légale générale est de six mois.</div> <a href='https://www.service-public.fr/particuliers/vosdroits/F16734' target='_blank' rel='noopener'>Service-Public ↗</a>."],
-["stage","Quand commencer mon stage ?","date debut commencer mai juin juillet aout periode quand","Le stage peut commencer entre début mai et début août. Il est conseillé de faire au minimum un mois, mais il est préférable de faire minimum deux mois afin d’acquérir davantage de connaissances et de pouvoir être autonome. <div class='callout'>Ces repères sont à confirmer pour l’année universitaire en cours et doivent être compatibles avec le calendrier pédagogique.</div>"],
-["stage","Quand commencer à chercher un stage ?","chercher recherche postuler decembre candidature cv offre","Tu peux commencer à postuler dès début décembre ! Plus tu t’y prends tôt, plus tu as de chances de trouver la structure qui te correspond. Prépare un CV à jour, une lettre adaptable, une liste de structures et un tableau de suivi. <a href='https://univ-lyon2.jobteaser.com/' target='_blank' rel='noopener'>JobTeaser Lyon 2 ↗</a>."],
-["stage","Puis-je faire mon stage à l’étranger ?","etranger international pays hors france","Tu peux réaliser un stage à l’étranger tant que les missions correspondent au domaine du tourisme. Bien se renseigner sur les démarches administratives supplémentaires qui peuvent être différentes selon le pays d'accueil. Contacte le service des stages avant de commencer les démarches ! <a href='https://www.univ-lyon2.fr/international' target='_blank' rel='noopener'>International Lyon 2 ↗</a>."],
-["stage","Qui peut m’aider pour mon CV et ma recherche de stage ?","cosie aide cv lettre motivation entretien insertion orientation reseau","Le <b>COSIE</b> (Centre d’Orientation, des Stages et de l’Insertion des Étudiantes et étudiants) peut t’accompagner dans ton insertion professionnelle. Ils peuvent t’accompagner sur la recherche de stage, ta candidature et l’entretien de recrutement, la construction de ton réseau professionnel et même sur un projet de césure ! Téléphone : <b>04 78 77 23 42</b>. <a href='https://www.univ-lyon2.fr/formation/contacts-cosie' target='_blank' rel='noopener'>Coordonnées et horaires COSIE ↗</a>."],
-["emploi","Où chercher des offres de stage en tourisme ?","offre stage emploi alternance chercher jobteaser tourisme recrutement","Tu peux consulter <a href='https://univ-lyon2.jobteaser.com/' target='_blank' rel='noopener'>JobTeaser Lyon 2</a>, <a href='https://www.francetravail.fr/' target='_blank' rel='noopener'>France Travail</a>, <a href='https://www.1jeune1solution.gouv.fr/' target='_blank' rel='noopener'>1 jeune 1 solution</a>, <a href='https://www.welcometothejungle.com/fr' target='_blank' rel='noopener'>Welcome to the Jungle</a> et <a href='https://www.hellowork.com/' target='_blank' rel='noopener'>HelloWork</a>. Pense aussi aux sites des offices de tourisme, collectivités, parcs naturels, hébergeurs, événements et bureaux d’études. Cherche par missions : marketing territorial, tourisme durable, observation, communication, gestion de projet."],
-["convention","Comment faire ma convention de stage ?","convention esup pstage ent intranet demande saisir signer","Une fois l’organisme d'accueil trouvé et le stage validé par l’établissement (par le professeur référent - M. Anthony Simon), tu dois effectuer une demande de convention via la plateforme Pstage (ou ESUP-Stage selon l'outil UFR). La convention devra être complétée et signée avant le début du stage. <div class='callout'>La convention doit être signée par toutes les parties avant le premier jour du stage.</div><a href='https://tt.univ-lyon2.fr/vie-etudiante/demarches' target='_blank' rel='noopener'>Procédure UFR ↗</a> · <a href='https://ent.univ-lyon2.fr/' target='_blank' rel='noopener'>Intranet Lyon 2 ↗</a>."],
-["convention","Qui complète et signe la convention ?","remplir complete signature signer tuteur entreprise structure","La convention est généralement complétée à partir des informations fournies par l'étudiant et l'organisme d'accueil. Tu dois veiller à ce que toutes les informations relatives aux missions, aux dates, aux horaires et aux tuteurs soient exactes. La convention doit être signée par les parties concernées : l'étudiant, l'organisme d'accueil et l'établissement, et occasionnellement les représentants/référents prévus par la convention. <a href='https://tt.univ-lyon2.fr/vie-etudiante/demarches' target='_blank' rel='noopener'>Procédure UFR ↗</a>."],
-["convention","Combien de temps prend la convention ?","delai temps traitement jours ouvres validation","Le délai de traitement dépend du service administratif et du nombre de demandes en cours. Prévoir plusieurs jours ouvrés et anticipe ta demande ! Ne commence pas le stage tant que la convention n’est pas signée. <a href='https://tt.univ-lyon2.fr/vie-etudiante/demarches' target='_blank' rel='noopener'>Démarches et contacts UFR ↗</a>."],
-["droits","Quand la gratification est-elle obligatoire ?","gratification remuneration remunere paye 308 309 heure deux mois seuil","En France, la gratification est obligatoire lorsque la durée du stage dépasse 2 mois consécutifs, soit l'équivalent de plus de 308 heures de présence dans le même organisme d'accueil au cours de la même année d’enseignement. En dessous de ce seuil, elle reste facultative. <br>💡 <i>Astuce :</i> il faut négocier lors de l’entretien s’il y a une possibilité de faire soit généralement 4 mois de stage (dans ce cas il y a une rémunération) ou bien, 2 mois de stage non rémunéré puis 2 mois en job saisonnier (CDD). <br>⚠️ Attention, pour les stages à l’étranger les modalités sont différentes et dépendent de chaque pays ! <a href='https://entreprendre.service-public.fr/vosdroits/F32131' target='_blank' rel='noopener'>Règle officielle Service-Public ↗</a>."],
-["droits","Quel est le montant minimum de gratification en 2026 ?","montant minimum taux horaire 4.50 4,50 2026","Le montant minimum légal est calculé sur la base d'un taux horaire fixé par la réglementation. Ce montant peut évoluer chaque année. On te conseille de consulter le site officiel Service-Public.fr pour connaître le taux en vigueur. Mais pour avoir une idée, en 2026, la gratification minimale des stagiaires en France s'élève à <b>4,50 € par heure de présence effective</b>. <a href='https://entreprendre.service-public.fr/vosdroits/F32131' target='_blank' rel='noopener'>Montant et règles officielles ↗</a>."],
-["droits","Ai-je droit à des congés pendant mon stage ?","conge conges absence vacances repos","Pour les stages de plus de 2 mois, la convention doit prévoir la possibilité de congés et d'autorisations d'absence. Les modalités sont définies avec l'organisme d'accueil et doivent figurer dans la convention. Toujours s’informer sur les conditions de travail ! <a href='https://www.service-public.fr/particuliers/vosdroits/F16734' target='_blank' rel='noopener'>Droits du stagiaire ↗</a>."],
-["droits","Puis-je travailler le week-end ou les jours fériés ?","weekend week end samedi dimanche ferie horaire repos heures","Tes horaires sont définis dans la convention de stage. Tu dois respecter les règles applicables dans l'organisme d'accueil, notamment concernant la durée du travail et les temps de repos. Il est toutefois dans ton droit de demander un aménagement de travail si nécessaire."],
-["stage","Que faire en cas de problème pendant mon stage ?","probleme conflit difficulte entreprise tuteur harcelement securite","Tu peux contacter ton tuteur pédagogique, ton responsable de formation (M. Anthony Simon) ou encore le service des stages de l’établissement. En cas de difficulté importante, signale rapidement la situation afin qu'une solution puisse être recherchée. <a href='https://www.univ-lyon2.fr/formation/contacts-cosie' target='_blank' rel='noopener'>Contacter le COSIE ↗</a>."],
-["rapport","Qu’est-ce que le rapport d’étonnement ?","rapport etonnement pages structure mission preconisation moodle","Le rapport d’étonnement doit faire une dizaine de pages et évoquer les points suivants : <ul><li>Présentation de la structure.</li><li>Missions.</li><li>Étonnement &amp; constats critiques.</li><li>Préconisations opérationnelles.</li></ul>Tu as la trame disponible sur Moodle et si tu la suis à la lettre, tu auras déjà une bonne partie des points ! Pour te démarquer des autres, n’hésite pas à avoir un esprit critique sur la structure, particulièrement pertinent dans les parties III (étonnement) et IV (préconisations). <a href='https://moodle.univ-lyon2.fr/' target='_blank' rel='noopener'>Moodle Lyon 2 ↗</a>."],
-["rapport","Quand rendre le rapport d’étonnement ?","date rendre deadline limite depot juillet rapport","Le rapport doit être rendu début juillet. M. Anthony Simon te confirmera cette date. Vérifie Moodle et les messages de la formation."],
-["rapport","À qui envoyer le rapport ?","envoyer deposer mail email pdf tuteur rapport","Tu dois l’envoyer par mail en PDF avant la date butoir à ton tuteur pédagogique qui te sera attribué par M. Anthony Simon."],
-["rapport","Y a-t-il une soutenance orale ?","oral soutenance defense presentation rapport","Il n’est pas attendu de soutenance orale pour ce rapport."],
-["emploi","Comment utiliser la méthode STAR en entretien ?","star entretien situation tache action resultat","La méthode STAR permet de structurer un exemple : <ul><li><b>S – Situation :</b> décris le contexte d’un projet passé.</li><li><b>T – Tâche :</b> précise l’objectif ou la difficulté rencontrée.</li><li><b>A – Action :</b> explique ce que TU as mis en œuvre.</li><li><b>R – Résultat :</b> partage l’apport concret (chiffres, succès, enseignements).</li></ul>Prépare des exemples issus d’un projet universitaire, d’un emploi ou d’un engagement."],
-["emploi","Quelles sont les 10 astuces pour réussir un entretien professionnel ?","entretien astuces reussir conseils oral recrutement preparer 10","🎯 <b>10 astuces clés pour réussir ton entretien professionnel :</b><ol><li><b>Renseigne-toi sur la structure :</b> valeurs, engagements durables et actualités récentes.</li><li><b>Prépare ton Pitch (2 min) :</b> qui tu es, ton parcours en Master Tourisme à Lyon 2 et pourquoi ce poste.</li><li><b>Utilise la méthode S.T.A.R.</b> pour illustrer tes compétences de manière structurée.</li><li><b>Soigne ton non-verbal :</b> écoute active, sourire, posture ouverte.</li><li><b>Mets en avant tes compétences durables :</b> RSE, gestion de projet, éco-conception.</li><li><b>Prépare 2 ou 3 questions :</b> pose des questions sur l'équipe ou les défis à venir.</li><li><b>Anticipe les questions pièges :</b> aborde tes axes d'amélioration de façon constructive.</li><li><b>Sois ponctuel·le :</b> arrive en avance ou teste ta connexion en visio.</li><li><b>Fais un suivi :</b> envoie un e-mail de remerciement dans les 24h.</li><li><b>Reste authentique :</b> montre ta passion pour le tourisme durable !</li></ol>Le COSIE peut t’accompagner : <a href='https://www.univ-lyon2.fr/formation/contacts-cosie' target='_blank' rel='noopener'>COSIE ↗</a>."],
-["emploi","Quelle différence entre stage et alternance ?","alternance apprentissage contrat difference salaire statut stage","<b>Stage :</b> statut d’étudiant, rémunéré par une gratification (si > 2 mois), convention tripartite.<br><b>Alternance (Apprentissage ou Pro) :</b> statut de salarié, vrai salaire mensuel (% du SMIC selon l'âge), congés payés légaux (5 semaines), cotisations retraite et chômage. <a href='https://www.univ-lyon2.fr/contact' target='_blank' rel='noopener'>Contacts alternance Lyon 2 ↗</a>."],
-["emploi","Comment améliorer mon CV et ma lettre de motivation ?","cv lettre motivation candidature ameliorer competence","<ul><li><b>Titre clair :</b> indique le poste visé (ex: <i>Stagiaire Chargé·e de Développement Touristique Durable</i>).</li><li><b>Structure aérée :</b> 1 page max, rubriques nettes (Expériences, Formations, Compétences RSE, Langues).</li><li><b>Missions concrètes :</b> utilise des verbes d'action.</li><li><b>Lettre (Vous / Moi / Nous) :</b> pourquoi eux, pourquoi toi, ce que vous accomplirez ensemble.</li></ul>Le COSIE peut t’aider : <a href='https://www.univ-lyon2.fr/formation/contacts-cosie' target='_blank' rel='noopener'>prendre contact ↗</a>."],
-["vie","Comment demander une bourse ou un logement Crous ?","bourse crous dse dossier social logement boursier aide","La demande de bourse sur critères sociaux (DSE) se fait en ligne généralement entre janvier et mai pour la rentrée suivante sur le portail <a href='https://www.messervices.etudiant.gouv.fr/' target='_blank' rel='noopener'>etudiant.gouv.fr ↗</a>. Pour les difficultés passagères, le service social du Crous propose des aides d'urgence. <a href='https://www.crous-lyon.fr/' target='_blank' rel='noopener'>Crous de Lyon ↗</a>."],
-["vie","Comment bénéficier du repas Crous à 1 euro ?","repas crous 1 euro 1€ izly restauration manger","Le tarif social est de 1,00 € pour les étudiants boursiers et de 3,30 € pour les non-boursiers (repas complet). Le Crous de Lyon propose aussi des formules en cafétérias. Pense à activer ton compte <a href='https://www.izly.fr/' target='_blank' rel='noopener'>Izly ↗</a>. <a href='https://www.crous-lyon.fr/' target='_blank' rel='noopener'>Crous de Lyon ↗</a>."],
-["vie","Comment faire une demande d’aide au logement ?","caf apl aide logement loyer allocation","Dès que tu as ton bail et les clés, fais ta demande d'aide au logement (APL) en ligne sur le site de la <a href='https://www.caf.fr/' target='_blank' rel='noopener'>CAF ↗</a>. C’est un coup de pouce mensuel précieux !"],
-["vie","Comment se déplacer à Lyon à tarif étudiant ?","transport tcl metro tram bus abonnement velo","Utilise les lignes de tramway <b>T3</b> ou <b>T5</b> (arrêts <i>Parc Technologique</i> ou <i>Campus Porte des Alpes</i>). Des stations Vélo'v sont également disponibles sur le campus. <a href='https://www.tcl.fr/' target='_blank' rel='noopener'>Site TCL ↗</a>."],
-["vie","Où trouver de l’aide pour ma santé ?","sante santé medecin psychologue stress sse soin","Le <b>SSE (Service de Santé Étudiante)</b> propose des consultations médicales, infirmerie et soutien psychologique gratuits pour les étudiants. <a href='https://www.univ-lyon2.fr/vie-des-campus/sante' target='_blank' rel='noopener'>Santé – Lyon 2 ↗</a>."],
-["vie","Qui contacter pour un aménagement lié au handicap ?","handicap amenagement accessibilite tiers temps situation","La <b>Mission Handicap</b> propose un accompagnement spécifique et un aménagement des études et des examens pour les étudiants en situation de handicap. <a href='https://www.univ-lyon2.fr/vie-des-campus/handicap' target='_blank' rel='noopener'>Mission handicap Lyon 2 ↗</a>."],
-["vie","Comment accéder aux bibliothèques universitaires ?","bibliotheque bu livre documentation ressource horaire","La BU Porte des Alpes propose des espaces pour travailler seul ou en groupe (salles réservables en ligne) et une documentation riche en tourisme. <a href='https://bu.univ-lyon2.fr/' target='_blank' rel='noopener'>Bibliothèques Lyon 2 ↗</a>."],
-["master","Où trouver les contacts de la scolarité ?","contact scolarite secretariat mail telephone ufr","Le responsable du Master est <b>M. Anthony Simon</b> (anthony.simon@univ-lyon2.fr). Pour toute autre question administrative, rapproche-toi de la scolarité de l’UFR Temps et Territoires. <a href='https://tt.univ-lyon2.fr/' target='_blank' rel='noopener'>UFR Temps et Territoires ↗</a>"]
+// --- CATEGORIE : STAGE M1 ---
+["stage","Le stage est-il obligatoire pour valider mon M1 ?","La réalisation d’un stage est <b>obligatoire en M1</b>.<br><br>Il te permet de valider les crédits ECTS associés à cette expérience professionnelle, tout en mettant en pratique les connaissances théoriques et méthodologiques acquises durant ta formation.<div class='callout'>📌 <b>Rappel :</b> Vérifie les modalités précises sur Moodle ou auprès de ton responsable de formation (M. Anthony Simon).</div>"],
+
+["stage","Quelle est la durée minimale du stage ?","Il n’y a pas officiellement de durée minimale fixée au niveau national.<br><br>Cependant, il est <b>fortement conseillé de faire un stage de plus de deux mois</b> (soit plus de 44 jours de présence / 308 heures) afin de bénéficier obligatoirement d’une gratification minimale légale et d’acquérir des compétences concrètes et autonomes. <p><a href='https://www.service-public.fr/particuliers/vosdroits/F16734' target='_blank' rel='noopener'>Voir les règles officielles sur Service-Public.fr ↗</a></p>"],
+
+["stage","Quelle est la durée maximale du stage ?","En France, la durée légale d'un stage dans un même organisme d'accueil est limitée à <b>6 mois maximum par année d'enseignement</b> (924 heures de présence).<br><br>Dans le cadre de votre Master 1 Tourisme, il est recommandé de réaliser au <b>maximum 4 mois de stage</b> afin de ne pas empiéter sur la reprise des cours au mois de septembre. <div class='callout'>⚠️ La limite de 4 mois est une recommandation pédagogique à anticiper avec ton responsable de formation.</div>"],
+
+["stage","Quelle est la date limite pour commencer mon stage ?","Il est conseillé de réaliser <b>au minimum 1 mois à 2 mois</b> de stage. Celui-ci peut commencer entre <b>début mai et début août</b>.<br><br>Il est néanmoins fortement conseillé d'effectuer au moins deux mois de stage afin d'avoir le temps de prendre en main vos missions, d’être autonome et de pouvoir bénéficier d'une gratification. <p>Pensez à faire valider vos dates exactes auprès de votre responsable pédagogique (M. Anthony Simon) avant de finaliser votre convention.</p>"],
+
+["stage","Puis-je réaliser mon stage à l'étranger ?","<b>Oui !</b> Vous pouvez réaliser un stage à l’étranger tant que vos missions sont directement en lien avec le secteur du tourisme et validées par l'équipe pédagogique.<br><br><b>Consignes importantes :</b><ul><li>Informez-vous bien sur les démarches administratives et de visa propres au pays d'accueil.</li><li>Contactez le service des stages et la Direction des Relations Internationales de Lyon 2 avant de débuter vos démarches.</li><li>Attention, les règles de gratification et de couverture santé varient selon les pays !</li></ul><p><a href='https://www.univ-lyon2.fr/international' target='_blank' rel='noopener'>Consulter le pôle International Lyon 2 ↗</a></p>"],
+
+["stage","Quand dois-je commencer à postuler pour trouver mon stage ?","Vous pouvez commencer à postuler <b>dès le mois de décembre !</b><br><br>Plus vous vous y prenez tôt, plus vous aurez de choix parmi les structures qui vous correspondent (Offices de Tourisme, agences réceptives, bureaux d'études, parcs naturels, collectivités, entreprises touristiques).<p><a href='https://univ-lyon2.jobteaser.com/' target='_blank' rel='noopener'>Accéder aux offres sur JobTeaser Lyon 2 ↗</a></p>"],
+
+["stage","Qui peut m’aider pour ma recherche de stage, CV et entretien ?","Vous pouvez contacter le <b>COSIE</b> (Centre d’Orientation, des Stages et de l’Insertion des Étudiantes et étudiants).<br><br>Le COSIE vous accompagne sur :<ul><li>La rédaction de votre CV et de vos lettres de motivation.</li><li>La préparation de vos entretiens de recrutement.</li><li>La construction de votre réseau professionnel.</li><li>Vos projets de césure ou d'insertion.</li></ul><p>📍 <b>Contact COSIE Lyon 2 :</b> 04 78 77 23 42 · <a href='https://www.univ-lyon2.fr/formation/contacts-cosie' target='_blank' rel='noopener'>Coordonnées et horaires du COSIE ↗</a></p>"],
+
+// --- CATEGORIE : CONVENTION ---
+["convention","Comment obtenir ma convention de stage ?","Une fois votre organisme d'accueil trouvé et les missions validées par votre professeur référent (M. Anthony Simon) :<ol><li>Connectez-vous à la plateforme <b>Pstage / ESUP-Stage</b> via votre <a href='https://ent.univ-lyon2.fr/' target='_blank' rel='noopener'>ENT Lyon 2 ↗</a>.</li><li>Complétez l'ensemble des informations (dates, horaires, gratification, tuteur).</li><li>Soumettez votre demande pour validation administrative.</li><li>Faites signer la convention par toutes les parties (étudiant, entreprise, université) <b>avant le premier jour du stage</b>.</li></ol><p><a href='https://tt.univ-lyon2.fr/vie-etudiante/demarches' target='_blank' rel='noopener'>Procédure de convention de l'UFR ↗</a></p>"],
+
+["convention","Où trouver le formulaire de demande de convention ?","Le formulaire de convention de stage ne s'imprime pas vierge : il s'effectue directement en ligne sur l'application <b>Pstage / ESUP-Stage</b> accessible via l'onglet « Démarches / Vie étudiante » de votre <a href='https://ent.univ-lyon2.fr/' target='_blank' rel='noopener'>ENT Université Lumière Lyon 2 ↗</a>."],
+
+["convention","Qui doit compléter et signer la convention de stage ?","La convention est complétée à partir des données conjointes fournies par <b>l'étudiant</b> et <b>l'organisme d'accueil</b>.<br><br>Elle doit impérativement être signée par :<ul><li>L'étudiant(e) stagiaire.</li><li>Le tuteur / représentant de l'organisme d'accueil.</li><li>L'enseignant référent (M. Anthony Simon).</li><li>Le président de l'Université / Responsable administratif de l'UFR.</li></ul><div class='callout'>⚠️ Aucune prise de poste ne peut avoir lieu sans convention signée par l'ensemble des parties.</div>"],
+
+["convention","Quel est le délai de traitement d'une convention ?","Le délai de traitement varie selon le volume des demandes reçues par le service administratif.<br><br><b>Prévoyez systématiquement plusieurs jours ouvrés</b> (voire 1 à 2 semaines en période de pointe) et anticipez votre demande ! Ne commencez jamais un stage sans convention finalisée.<p><a href='https://tt.univ-lyon2.fr/vie-etudiante/demarches' target='_blank' rel='noopener'>Contacter le secrétariat de l'UFR Temps et Territoires ↗</a></p>"],
+
+// --- CATEGORIE : DROITS ET GRATIFICATION ---
+["droits","Le stage est-il obligatoirement rémunéré / gratifié ?","En France, la gratification est <b>obligatoire dès lors que la durée du stage dépasse 2 mois consécutifs</b> (soit plus de 44 jours de présence à 7h/jour ou plus de 308 heures au total). En dessous de ce Seuil, elle reste facultative.<br><br>💡 <b>Astuces & Stratégie lors de l'entretien :</b><ul><li>Négociez la durée : visez un stage de 4 mois (gratifié).</li><li>Option alternative : proposez 2 mois de stage (non gratifié) suivis immédiatement de 2 mois en job saisonnier / CDD rémunéré.</li></ul><div class='callout'>⚠️ Pour un stage à l'étranger, les obligations de gratification dépendent des lois locales du pays d'accueil !</div>"],
+
+["droits","Quel est le montant minimum de la gratification en 2026 ?","Le montant minimum légal est calculé sur la base d'un taux horaire réglementé.<br><br>À titre indicatif, pour l'année <b>2026</b>, la gratification minimale réglementaire s'élève à <b>4,50 € par heure de présence effective</b>.<br><br>L'organisme d'accueil peut librement verser un montant supérieur. <p><a href='https://entreprendre.service-public.fr/vosdroits/F32131' target='_blank' rel='noopener'>Vérifier les barèmes officiels sur Service-Public.fr ↗</a></p>"],
+
+["droits","Ai-je droit à des congés pendant mon stage ?","Pour tous les stages de plus de 2 mois, la convention de stage doit obligatoirement prévoir la <b>possibilité de congés et d'autorisations d'absence</b>.<br><br>Les modalités de prise de congés doivent être définies en accord avec votre organisme d'accueil et inscrites dans la convention. <i>Remarque : la gratification pendant les congés n'est pas obligatoirement maintenue par la loi.</i>"],
+
+["droits","Quels sont mes horaires et droits (week-ends et jours fériés) ?","Vos horaires de travail hebdomadaires sont fixés dans votre convention de stage (ex: 35h/semaine).<br><br>Vous devez respecter la durée maximale du travail et les repos légaux. Dans le secteur du tourisme, vous pouvez être amené(e) à travailler les week-ends ou jours fériés si la convention le précise explicitement et que cela est propre aux activités de la structure. Vous avez le droit d'échanger avec votre tuteur pour adapter votre emploi du temps."],
+
+["droits","Qui contacter en cas de problème ou conflit en entreprise ?","En cas de difficulté (non-respect des missions, surcharge, conflit, harcèlement) :<ol><li>Alertez rapidement votre <b>tuteur pédagogique</b> et votre responsable de formation (<b>M. Anthony Simon</b>).</li><li>Contactez le service des stages ou le <b>COSIE</b> si besoin d’une médiation.</li></ol><div class='callout'>🚨 Ne restez jamais isolé(e) face à un problème. Signalez la situation dès les premiers signaux.</div>"],
+
+// --- CATEGORIE : RAPPORT D'ÉTONNEMENT ---
+["rapport","Qu’est-ce qu’un rapport d’étonnement (M1) ?","Le rapport d’étonnement fait <b>une dizaine de pages</b> et vise à analyser votre immersion dans la structure d'accueil.<br><br><b>Structure recommandée :</b><ol><li><b>Présentation de la structure :</b> Contexte, secteur, organisation.</li><li><b>Missions réalisées :</b> Description de votre rôle au quotidien.</li><li><b>Étonnements & Constats :</b> Regards critiques sur l'organisation, les processus, la durabilité.</li><li><b>Préconisations :</b> Recommandations concrètes et pistes d’amélioration.</li></ol><div class='callout'>💡 <b>Conseil pour se démarquer :</b> Suivez la trame disponible sur <a href='https://moodle.univ-lyon2.fr/' target='_blank' rel='noopener'>Moodle Lyon 2 ↗</a> et développez un esprit critique constructif particulièrement dans les parties III et IV.</div>"],
+
+["rapport","Quelle est la date limite de dépôt du rapport d’étonnement ?","Le rapport d’étonnement doit généralement être rendu <b>début juillet</b>.<br><br>La date exacte vous sera confirmée au cours du semestre par votre responsable de formation (M. Anthony Simon). Consultez régulièrement Moodle."],
+
+["rapport","Où et comment déposer mon rapport de stage ?","Le rapport d’étonnement doit être envoyé <b>par e-mail au format PDF</b> à votre tuteur pédagogique (qui vous sera attribué par M. Anthony Simon) avant la date butoir fixée."],
+
+["rapport","Une soutenance orale est-elle obligatoire pour le M1 ?","<b>Non.</b> Il n’est pas attendu de soutenance orale pour le rapport d’étonnement du Master 1 Tourisme, sauf consigne spécifique contraire communiquée sur Moodle."],
+
+// --- CATEGORIE : EMPLOI & ENTRETIENS ---
+["emploi","Quelles sont les 10 astuces pour réussir un entretien professionnel ?","🎯 <b>Les 10 règles d'or pour réussir votre entretien :</b><ol><li><b>Renseignez-vous sur la structure :</b> Étudiez ses projets touristiques, ses valeurs et son positionnement RSE.</li><li><b>Préparez votre Pitch (2 min) :</b> Présentez clairement votre parcours en Master Tourisme Lyon 2 et vos motivations.</li><li><b>Utilisez la méthode S.T.A.R. :</b> Illustrez vos compétences avec des exemples vécus (Situation, Tâche, Action, Résultat).</li><li><b>Soignez votre posture :</b> Écoute active, regard confiant et enthousiasme.</li><li><b>Valorisez le tourisme durable :</b> Montre votre sensibilité aux transitions écologiques et sociétales.</li><li><b>Préparez 2 à 3 questions pertinentes :</b> Interrogez les recruteurs sur l'équipe ou les projets à venir.</li><li><b>Anticipez les questions classiques :</b> Points forts, axes de progression, gestion du stress.</li><li><b>Soyez ponctuel(le) :</b> Arrivez 5 à 10 min en avance (ou testez la visio).</li><li><b>Envoyez un e-mail de remerciement :</b> Dans les 24h pour réaffirmer votre motivation.</li><li><b>Restez authentique :</b> L'intérêt sincère pour le secteur fait la différence !</li></ol><p><a href='https://www.univ-lyon2.fr/formation/contacts-cosie' target='_blank' rel='noopener'>Prendre rendez-vous au COSIE pour s'entraîner ↗</a></p>"],
+
+["emploi","Comment utiliser la méthode S.T.A.R. en entretien ?","La méthode <b>S.T.A.R.</b> permet de structurer vos réponses de façon claire et convaincante :<ul><li><b>S – Situation :</b> Posez le cadre et le contexte de votre expérience passée.</li><li><b>T – Tâche :</b> Indiquez l'objectif fixé ou le problème à résoudre.</li><li><b>A – Action :</b> Expliquez concrètement les actions que <b>VOUS</b> avez menées.</li><li><b>R – Résultat :</b> Donnez l'impact réel (chiffres, succès, apprentissages).</li></ul>"],
+
+["emploi","Quelle est la différence entre stage et alternance ?","<b>Stage :</b><ul><li>Statut d'étudiant.</li><li>Encadré par une convention de stage.</li><li>Gratification minimale (si > 2 mois).</li></ul><b>Alternance (Apprentissage / Professionnalisation) :</b><ul><li>Statut de salarié.</li><li>Véritable contrat de travail avec rémunération (% du SMIC).</li><li>Congés payés (5 semaines) et cotisations sociales.</li></ul><p>Vérifiez auprès de l'équipe pédagogique si le rythme du Master est compatible avec l'alternance.</p>"],
+
+["emploi","Où chercher des offres de stage en tourisme ?","Plateformes d'offres conseillées :<ul><li><a href='https://univ-lyon2.jobteaser.com/' target='_blank' rel='noopener'>JobTeaser Lyon 2 ↗</a> (Offres réservées aux étudiants Lyon 2).</li><li><a href='https://www.francetravail.fr/' target='_blank' rel='noopener'>France Travail ↗</a> &amp; <a href='https://www.1jeune1solution.gouv.fr/' target='_blank' rel='noopener'>1 jeune 1 solution ↗</a>.</li><li><a href='https://www.welcometothejungle.com/fr' target='_blank' rel='noopener'>Welcome to the Jungle ↗</a>.</li><li><b>Candidatures spontanées :</b> Sites internet des Offices de Tourisme, Parcs Naturels Régionaux, CDT/CRT et agences réceptives.</li></ul>"],
+
+["emploi","Comment optimiser son CV et sa lettre de motivation ?","<b>Pour votre CV :</b> 1 page, titre précis (ex: <i>Chargé·e de développement touristique durable</i>), verbes d'action pour détailler vos expériences.<br><br><b>Pour la lettre :</b> Appliquez la méthode <b>Vous / Moi / Nous</b> (Pourquoi cette structure / Ce que vous apportez / Ce que vous créerez ensemble).<p><a href='https://www.univ-lyon2.fr/formation/contacts-cosie' target='_blank' rel='noopener'>Faire relire vos candidatures par le COSIE ↗</a></p>"],
+
+// --- CATEGORIE : MASTER ---
+["master","Que propose le Master Tourisme à Lyon 2 ?","Le Master Tourisme de l'Université Lumière Lyon 2 forme des experts en ingénierie, marketing territorial et gestion de projets touristiques durables.<br><br>Les étudiants développent des compétences en valorisation des patrimoines, analyse des données territoriales et gouvernance locale du tourisme. <p><a href='https://tt.univ-lyon2.fr/presentation/tourisme' target='_blank' rel='noopener'>Présentation du département Tourisme ↗</a></p>"],
+
+["master","Quels sont les contacts de la scolarité du Master ?","Le responsable de la formation est <b>M. Anthony Simon</b> (anthony.simon@univ-lyon2.fr).<br><br>Pour les questions administratives et d'inscription, contactez le secrétariat de l'UFR Temps et Territoires. <p><a href='https://tt.univ-lyon2.fr/' target='_blank' rel='noopener'>Site officiel UFR Temps et Territoires ↗</a></p>"],
+
+// --- CATEGORIE : VIE ETUDIANTE ---
+["vie","Comment bénéficier du repas Crous à 1 euro ?","Le repas Crous à <b>1,00 €</b> s'adresse à tous les étudiants boursiers (et non-boursiers en situation de précarité évaluée). Le tarif social standard est de 3,30 €.<br><br>Pour en bénéficier, activez votre compte Izly avec votre e-mail étudiant. <p><a href='https://www.crous-lyon.fr/' target='_blank' rel='noopener'>Informations Crous de Lyon ↗</a> · <a href='https://www.izly.fr/' target='_blank' rel='noopener'>Izly ↗</a></p>"],
+
+["vie","Comment demander une bourse ou un logement Crous ?","Les demandes de bourse et de logement en résidence universitaire s'effectuent via le <b>Dossier Social Étudiant (DSE)</b>.<br><br>Le dépôt se fait en ligne généralement entre janvier et mai pour la rentrée suivante. <p><a href='https://www.messervices.etudiant.gouv.fr/' target='_blank' rel='noopener'>Portail MesServices.etudiant.gouv.fr ↗</a></p>"],
+
+["vie","Comment se déplacer à Lyon avec les tarifs étudiants TCL ?","Le réseau TCL (métro, tramway, bus) propose des abonnements étudiants à tarif réduit selon votre âge et situation sociale.<br><br>Pour vous rendre sur le campus Porte des Alpes, empruntez le tramway <b>T3</b> ou <b>T5</b>. Des stations Vélo'v sont aussi présentes. <p><a href='https://www.tcl.fr/' target='_blank' rel='noopener'>Site et abonnements TCL ↗</a></p>"]
 ];
 
-const msgs=document.getElementById("messages"),input=document.getElementById("q"),shortcutsContainer=document.getElementById("shortcuts");
-let category="all";
-const stop=new Set("le la les un une des du de d l a au aux en pour par sur dans avec et ou est son sa ses mon ma mes ton ta tes je tu il elle nous vous qui que quoi quand comment pourquoi faire avoir".split(" "));
+const msgs = document.getElementById("messages");
+const shortcutsContainer = document.getElementById("shortcuts");
+const shortcutsTitle = document.getElementById("shortcutsTitle");
+let currentCategory = "all";
 
-function norm(s){return String(s).toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"").replace(/[^a-z0-9]+/g," ").trim()}
-function words(s){return norm(s).split(/\s+/).filter(x=>x.length>1&&!stop.has(x))}
-function esc(s){return String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
+// NOMS CLAIRS POUR L'AFFICHAGE DES THÉMATIQUES
+const catNames = {
+  all: "Toutes les questions",
+  stage: "🧭 Stage M1",
+  convention: "📄 Convention de stage",
+  droits: "💶 Droits & Gratification",
+  rapport: "📝 Rapport d'étonnement",
+  emploi: "💼 Emploi & Entretiens",
+  master: "🎓 Master Tourisme",
+  vie: "🏡 Vie étudiante"
+};
 
-// MISE À JOUR DYNAMIQUE DES BOUTONS RAPIDES SELON LA THÉMATIQUE
-function updateShortcuts(){
-  shortcutsContainer.innerHTML="";
-  const filtered = category === "all" ? F : F.filter(item => item[0] === category);
-  filtered.slice(0, 8).forEach(item => {
+// AFFICHAGE DES BOUTONS SELON LA CATEGORIE SELECTIONNEE
+function updateShortcuts() {
+  shortcutsContainer.innerHTML = "";
+  shortcutsTitle.textContent = `💡 Questions : ${catNames[currentCategory] || 'Sélection'}`;
+
+  const filtered = currentCategory === "all" ? F : F.filter(item => item[0] === currentCategory);
+
+  filtered.forEach(item => {
     const btn = document.createElement("button");
-    btn.setAttribute("data-q", item[1]);
     btn.textContent = item[1];
+    btn.onclick = () => showAnswer(item[1], item[2]);
     shortcutsContainer.appendChild(btn);
   });
 }
 
-function add(text,who){const d=document.createElement("div");d.className="msg "+who;if(who==="user")d.textContent=text;else d.innerHTML=text;msgs.appendChild(d);msgs.scrollTop=msgs.scrollHeight;return d}
-
-function search(query){
- const q=norm(query),w=words(query);
- const scored=F.map((f,i)=>{const [cat,title,keys]=f;let score=0;const keylist=keys.split(" ").map(norm);for(const k of keylist){if(!k)continue;for(const t of w){if(t===k)score+=3.4;else if(t.length>3&&k.length>3&&(t.startsWith(k)||k.startsWith(t)))score+=1}}
- if(norm(title)===q)score+=12;if(category!=="all"&&category===cat)score+=1;return {f,score,i}}).sort((a,b)=>b.score-a.score);
- if(!scored[0]||scored[0].score<4.5){const near=scored.filter(x=>x.score>=2.6).slice(0,4);let h="<h3>Je n’ai pas trouvé de réponse assez fiable 🤔</h3><p>Je préfère ne pas inventer. Reformule ta question ou contacte la scolarité / le service compétent.</p>";if(near.length)h+="<p>Tu voulais peut-être parler de :</p><div class='suggestions'>"+near.map(x=>`<button data-index="${x.i}">${esc(x.f[1])}</button>`).join("")+"</div>";h+="<p><a href='https://tt.univ-lyon2.fr/vie-etudiante/demarches' target='_blank' rel='noopener'>Démarches UFR ↗</a> · <a href='https://www.univ-lyon2.fr/formation/contacts-cosie' target='_blank' rel='noopener'>COSIE ↗</a></p>";add(h,"bot");return}
- if(scored[1]&&scored[0].score-scored[1].score<1&&scored[0].score<8){add("<h3>Pour te répondre correctement, choisis un sujet :</h3><div class='suggestions'>"+scored.filter(x=>x.score>=scored[0].score-1).slice(0,3).map(x=>`<button data-index="${x.i}">${esc(x.f[1])}</button>`).join("")+"</div>","bot");return}
- add("<h3>"+esc(scored[0].f[1])+"</h3>"+scored[0].f[3],"bot")
+// AJOUT D'UN MESSAGE DANS LE CHAT
+function addMessage(htmlContent, who) {
+  const d = document.createElement("div");
+  d.className = "msg " + who;
+  d.innerHTML = htmlContent;
+  msgs.appendChild(d);
+  msgs.scrollTop = msgs.scrollHeight;
 }
 
-function ask(q){q=String(q||"").trim();if(!q)return;add(q,"user");input.value="";const t=add("Simon recherche dans sa FAQ…","bot");setTimeout(()=>{t.remove();search(q)},160)}
+// DECLENCHEMENT PAR CLIC SUR UN BOUTON
+function showAnswer(questionText, answerHtml) {
+  // Affiche la question cliquée côté utilisateur
+  addMessage(questionText, "user");
 
-document.getElementById("form").addEventListener("submit",e=>{e.preventDefault();ask(input.value)});
-document.addEventListener("click",e=>{const q=e.target.closest("[data-q]");if(q){ask(q.dataset.q);return}const b=e.target.closest("[data-index]");if(b){const f=F[Number(b.dataset.index)];if(f)ask(f[1])}});
+  // Simulation d'un court délai pour un effet conversationnel fluide
+  setTimeout(() => {
+    addMessage(`<h3>${questionText}</h3>${answerHtml}`, "bot");
+  }, 120);
+}
 
-document.getElementById("nav").addEventListener("click",e=>{
-  const b=e.target.closest("[data-cat]");
-  if(!b)return;
-  category=b.dataset.cat;
-  document.querySelectorAll("nav button").forEach(x=>x.classList.toggle("active",x===b));
-  updateShortcuts(); // Met à jour les boutons rapides selon le choix de gauche
-  add(category==="all"?"Toutes les thématiques sont sélectionnées. Pose-moi une question !":"Thématique sélectionnée : "+b.textContent.trim()+". Pose-moi une question sur ce sujet.","bot");
+// GESTION DE LA NAVIGATION LATÉRALE
+document.getElementById("nav").addEventListener("click", e => {
+  const b = e.target.closest("[data-cat]");
+  if (!b) return;
+
+  currentCategory = b.dataset.cat;
+  document.querySelectorAll("nav button").forEach(x => x.classList.toggle("active", x === b));
+  
+  updateShortcuts();
+
+  const msgText = currentCategory === "all" 
+    ? "Toutes les catégories sont affichées. Cliquez sur une question ci-dessous !" 
+    : `Catégorie <b>${catNames[currentCategory]}</b> sélectionnée. Cliquez sur la question de votre choix ci-dessous :`;
+    
+  addMessage(msgText, "bot");
 });
 
-document.getElementById("clear").addEventListener("click",()=>{msgs.innerHTML="<div class='msg bot'><h3>Nouvelle conversation 👋</h3>Bonjour ! Pose-moi une question sur le Master, les stages, les démarches ou la vie étudiante.</div>";input.focus()});
-document.getElementById("questionSelect").addEventListener("change",e=>{if(e.target.value){ask(e.target.value);e.target.value=""}});
+// BOUTON REINITIALISER
+document.getElementById("clear").addEventListener("click", () => {
+  msgs.innerHTML = `<div class="msg bot welcome"><h3>Nouvelle conversation 👋</h3>Sélectionne une thématique à gauche ou clique directement sur l'une des questions ci-dessous.</div>`;
+});
 
-// Initialisation au chargement
+// INITIALISATION AU CHARGEMENT
 updateShortcuts();
 </script></body></html>
