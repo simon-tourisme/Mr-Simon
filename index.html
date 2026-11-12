@@ -36,16 +36,21 @@ nav button.active{background:var(--g);color:white;border-color:var(--g);font-wei
 .suggestions{display:flex;flex-direction:column;gap:5px;margin-top:8px}
 .suggestions button{background:white;border:1px solid var(--line);color:var(--g);border-radius:9px;padding:8px 10px;text-align:left;font-size:.81rem;font-weight:600;cursor:pointer}
 
-/* ZONE BASSE : SUGGESTIONS TACTILES + BARRE DE RECHERCHE SIMPLIFIÉE */
-.composer{padding:8px 10px 10px;border-top:1px solid var(--line);background:#ffffff;display:flex;flex-direction:column;gap:7px;flex-shrink:0}
-.shortcuts-header{display:flex;justify-content:space-between;align-items:center;padding:0 2px}
-.shortcuts-title{font-size:.68rem;font-weight:800;color:var(--g2);text-transform:uppercase;letter-spacing:.04em}
+/* ZONE BASSE : LISTE DÉROULANTE DE BOUTONS + RECHERCHE */
+.composer{padding:8px 10px 10px;border-top:1px solid var(--line);background:#ffffff;display:flex;flex-direction:column;gap:8px;flex-shrink:0}
 
-/* Bandeau horizontal de boutons rapides (idéal quand le clavier téléphone s'ouvre) */
-.shortcuts{display:flex;gap:6px;overflow-x:auto;padding-bottom:2px;-webkit-overflow-scrolling:touch;scrollbar-width:none}
-.shortcuts::-webkit-scrollbar{display:none}
-.shortcuts button{white-space:nowrap;background:var(--mint);border:1px solid #cde0d5;color:var(--g);border-radius:12px;padding:8px 12px;font-size:.8rem;font-weight:600;cursor:pointer;flex-shrink:0;min-height:36px;display:flex;align-items:center}
-.shortcuts button:active{background:var(--g);color:white}
+/* Liste déroulante tactile (tiroir vertical de boutons) */
+details.dropdown-box{border:1px solid #cde0d5;border-radius:12px;background:var(--mint);overflow:hidden}
+details.dropdown-box summary{list-style:none;padding:9px 12px;font-size:.8rem;font-weight:700;color:var(--g);cursor:pointer;display:flex;justify-content:space-between;align-items:center;user-select:none}
+details.dropdown-box summary::-webkit-details-marker{display:none}
+details.dropdown-box summary::after{content:"▾";font-size:1rem;transition:transform 0.2s ease}
+details.dropdown-box[open] summary::after{transform:rotate(180deg)}
+details.dropdown-box[open] summary{border-bottom:1px solid #cde0d5}
+
+.shortcuts{display:flex;flex-direction:column;gap:5px;max-height:190px;overflow-y:auto;padding:8px;background:#f9fcfa;-webkit-overflow-scrolling:touch}
+.shortcuts button{background:white;border:1px solid var(--line);color:var(--g);border-radius:9px;padding:9px 11px;font-size:.81rem;font-weight:600;cursor:pointer;text-align:left;width:100%;line-height:1.25;box-shadow:0 1px 2px rgba(0,0,0,0.03);transition:background 0.12s}
+.shortcuts button:active{background:var(--g);color:white;border-color:var(--g)}
+.empty-msg{font-size:.8rem;color:var(--muted);text-align:center;padding:8px}
 
 /* Champ d'écriture simplifié */
 form{display:flex;gap:6px;align-items:center;position:relative}
@@ -86,15 +91,15 @@ input:focus{border-color:var(--g2);background:#ffffff;box-shadow:0 0 0 3px #2876
     <div id="messages" aria-live="polite">
       <div class="msg bot welcome">
         <h3>Bonjour ! Moi, c’est Simon 👋</h3>
-        Touche une <b>question rapide</b> ci-dessous ou tape simplement <b>un mot-clé</b> (ex : <i>convention, 308h, LinkedIn, relance, STAR...</i>) pour accéder aux réponses et astuces.
+        Déplie la liste des <b>questions rapides</b> ci-dessous ou tape simplement <b>un mot-clé</b> (ex : <i>convention, 308h, LinkedIn, relance, STAR...</i>) pour afficher les réponses et astuces.
       </div>
     </div>
 
     <div class="composer">
-      <div class="shortcuts-header">
-        <div class="shortcuts-title" id="shortcutsTitle">💡 Questions rapides (glisser →)</div>
-      </div>
-      <div class="shortcuts" id="shortcuts"></div>
+      <details class="dropdown-box" id="dropdownBox">
+        <summary id="shortcutsTitle">💡 Questions rapides</summary>
+        <div class="shortcuts" id="shortcuts"></div>
+      </details>
       
       <form id="form">
         <div class="input-wrap">
@@ -165,6 +170,7 @@ const F=[
 const msgs = document.getElementById("messages");
 const shortcutsContainer = document.getElementById("shortcuts");
 const shortcutsTitle = document.getElementById("shortcutsTitle");
+const dropdownBox = document.getElementById("dropdownBox");
 const input = document.getElementById("q");
 const resetInput = document.getElementById("resetInput");
 let currentCategory = "all";
@@ -184,7 +190,7 @@ function norm(s){
   return String(s).toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"").replace(/[^a-z0-9]+/g," ").trim();
 }
 
-// MISE À JOUR DES BOUTONS RAPIDES (PAR THÉMATIQUE OU FILTRAGE LIVE AU CLAVIER)
+// MISE À JOUR DE LA LISTE DÉROULANTE DE BOUTONS RAPIDES
 function updateShortcuts(filterText = "") {
   shortcutsContainer.innerHTML = "";
   const query = norm(filterText);
@@ -194,10 +200,19 @@ function updateShortcuts(filterText = "") {
   if (query.length > 0) {
     list = F.filter(item => norm(item[1] + " " + item[2]).includes(query));
     shortcutsTitle.textContent = list.length > 0 
-      ? `🔍 ${list.length} résultat(s) pour « ${filterText} »` 
-      : `🔍 Aucun mot-clé exact pour « ${filterText} »`;
+      ? `🔍 ${list.length} question(s) trouvée(s) pour « ${filterText} »` 
+      : `🔍 Aucune question trouvée pour « ${filterText} »`;
+    dropdownBox.open = true; // Ouvre automatiquement la liste pendant la saisie
   } else {
-    shortcutsTitle.textContent = `💡 ${catNames[currentCategory]} (glisser →)`;
+    shortcutsTitle.textContent = `💡 ${catNames[currentCategory]} (${list.length} questions)`;
+  }
+
+  if (list.length === 0) {
+    const empty = document.createElement("div");
+    empty.className = "empty-msg";
+    empty.textContent = "Essaie un autre mot-clé (ex : stage, CV, 308h, LinkedIn).";
+    shortcutsContainer.appendChild(empty);
+    return;
   }
 
   list.forEach(item => {
@@ -206,6 +221,7 @@ function updateShortcuts(filterText = "") {
     btn.textContent = item[1];
     btn.onclick = () => {
       showAnswer(item[1], item[3]);
+      dropdownBox.open = false; // Referme la liste pour laisser tout l'écran à la réponse
       clearSearch();
     };
     shortcutsContainer.appendChild(btn);
@@ -252,11 +268,12 @@ function handleTextSubmit(rawQuery) {
   }).sort((a, b) => b.score - a.score);
 
   addMessage(text, "user");
+  dropdownBox.open = false;
   clearSearch();
 
   setTimeout(() => {
     if (!scored[0] || scored[0].score < 2) {
-      addMessage(`<h3>Mot-clé non reconnu 🤔</h3>Essaie un mot simple comme <i>gratification, 308h, LinkedIn, relance, STAR, CV</i> ou choisis un bouton ci-dessous.`, "bot");
+      addMessage(`<h3>Mot-clé non reconnu 🤔</h3>Essaie un mot simple comme <i>gratification, 308h, LinkedIn, relance, STAR, CV</i> ou déplie la liste des questions rapides ci-dessous.`, "bot");
     } else if (scored[1] && scored[0].score - scored[1].score <= 2 && scored[0].score < 10) {
       const topChoices = scored.filter(s => s.score >= 2).slice(0, 3);
       const btnsHtml = topChoices.map(s => `<button type="button" data-pick="${s.item[1].replace(/"/g, '&quot;')}">${s.item[1]}</button>`).join("");
@@ -274,6 +291,7 @@ input.addEventListener("input", () => {
 });
 
 resetInput.addEventListener("click", () => {
+  dropdownBox.open = false;
   clearSearch();
   input.focus();
 });
@@ -298,10 +316,12 @@ document.getElementById("nav").addEventListener("click", e => {
   currentCategory = b.dataset.cat;
   document.querySelectorAll("nav button").forEach(x => x.classList.toggle("active", x === b));
   clearSearch();
+  dropdownBox.open = true; // Ouvre automatiquement la liste des questions du thème choisi
 });
 
 document.getElementById("clear").addEventListener("click", () => {
-  msgs.innerHTML = `<div class="msg bot welcome"><h3>Nouvelle conversation 👋</h3>Touche une <b>question rapide</b> ci-dessous ou tape un <b>mot-clé</b> pour accéder aux réponses et astuces.</div>`;
+  msgs.innerHTML = `<div class="msg bot welcome"><h3>Nouvelle conversation 👋</h3>Déplie la liste des <b>questions rapides</b> ci-dessous ou tape un <b>mot-clé</b> pour afficher les réponses et astuces.</div>`;
+  dropdownBox.open = false;
   clearSearch();
 });
 
